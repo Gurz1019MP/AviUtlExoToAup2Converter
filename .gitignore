@@ -1,0 +1,8 @@
+﻿################################################################################
+# この .gitignore ファイルは Microsoft(R) Visual Studio によって自動的に作成されました。
+################################################################################
+
+/.vs
+/AviUtlExoToAup2Converter/bin/Debug/net8.0-windows
+/AviUtlExoToAup2Converter/obj
+/AviUtlExoToAup2Converter/Recources

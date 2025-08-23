@@ -37,7 +37,7 @@ namespace AviUtlExoToAup2Converter.ViewModels
 
         #region Property
 
-        private string _ExoPath = "D:\\Repository\\AviUtlExoToAup2Converter\\AviUtlExoToAup2Converter\\Recources\\old_sample\\export.exo";
+        private string _ExoPath = string.Empty;
 
         public string ExoPath
         {

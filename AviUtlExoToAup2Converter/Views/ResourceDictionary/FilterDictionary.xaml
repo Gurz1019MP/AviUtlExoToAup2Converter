@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:vmief="clr-namespace:AviUtlExoToAup2Converter.ViewModels.Item.Exo.Filter">
+                    xmlns:vmief="clr-namespace:AviUtlExoToAup2Converter.ViewModels.Item.Exo.Filter"
+                    xmlns:mief="clr-namespace:AviUtlExoToAup2Converter.Models.Item.Exo.Filter">
     <DataTemplate DataType="{x:Type vmief:AudioFileViewModel}">
         <Expander BorderBrush="DarkGray"
                   BorderThickness="1"
@@ -118,4 +119,23 @@
             </Grid>
         </Expander>
     </DataTemplate>
+    <DataTemplate x:Key="AttributeTemplate" DataType="{x:Type mief:IAttribute}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{Binding Name}"/>
+            <TextBlock Grid.Column="1" Text="{Binding ValueString}"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmief:GeneralFilterViewModel}">
+        <Expander BorderBrush="DarkGray"
+              BorderThickness="1"
+              Margin="2"
+              Header="{Binding Name}">
+            <ItemsControl ItemsSource="{Binding Attributes}" ItemTemplate="{StaticResource AttributeTemplate}"/>
+        </Expander>
+    </DataTemplate>
+
 </ResourceDictionary>

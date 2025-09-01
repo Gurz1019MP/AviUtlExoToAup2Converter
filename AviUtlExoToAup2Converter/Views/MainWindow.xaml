@@ -48,77 +48,27 @@
             <Button Grid.Column="2" Content="保存" Command="{Binding ExportCommand}"/>
         </Grid>
         <ScrollViewer Grid.Row="1">
-            <ContentPresenter Content="{Binding ExoItem}">
+            <ContentPresenter Content="{Binding ExoItem2}">
                 <ContentPresenter.ContentTemplate>
-                    <DataTemplate DataType="vmie:ExoItemViewModel">
+                    <DataTemplate DataType="{x:Type vmie:ExoItem2ViewModel}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Width"/>
-                                <TextBlock Grid.Column="1" Text="{Binding Width}"/>
-                                <TextBlock Grid.Column="2" Text="Height"/>
-                                <TextBlock Grid.Column="3" Text="{Binding Height}"/>
-                                <TextBlock Grid.Row="1" Text="Rate"/>
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Rate}"/>
-                                <TextBlock Grid.Row="1" Grid.Column="2" Text="Scale"/>
-                                <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding Scale}"/>
-                                <TextBlock Grid.Row="2" Text="Length"/>
-                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Length}"/>
-                                <TextBlock Grid.Row="3" Text="AudioRate"/>
-                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding AudioRate}"/>
-                                <TextBlock Grid.Row="3" Grid.Column="2" Text="AudioChannel"/>
-                                <TextBlock Grid.Row="3" Grid.Column="3" Text="{Binding AudioChannel}"/>
-                            </Grid>
+                            <ItemsControl ItemsSource="{Binding Attributes}" ItemTemplate="{StaticResource AttributeTemplate}"/>
                             <ItemsControl Grid.Row="1" ItemsSource="{Binding ObjectItems}">
                                 <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="vmie:ObjectItemViewModel">
+                                    <DataTemplate DataType="{x:Type vmie:ObjectItem2ViewModel}">
                                         <Border BorderBrush="Gray"
                                     BorderThickness="1"
                                     Margin="2"
                                     CornerRadius="5">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <TextBlock Text="Start"/>
-                                                <TextBlock Grid.Column="1" Text="{Binding Start}"/>
-                                                <TextBlock Grid.Column="2" Text="End"/>
-                                                <TextBlock Grid.Column="3" Text="{Binding End}"/>
-                                                <TextBlock Grid.Row="1" Text="Layer"/>
-                                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Layer}"/>
-                                                <TextBlock Grid.Row="1" Grid.Column="2" Text="Overlay"/>
-                                                <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding Overlay}"/>
-                                                <TextBlock Grid.Row="2" Text="Audio"/>
-                                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Audio}"/>
-                                                <TextBlock Grid.Row="2" Grid.Column="2" Text="Camera"/>
-                                                <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding Camera}"/>
-                                                <ItemsControl Grid.Row="3" Grid.ColumnSpan="4"
-                                                  Padding="20,0,0,0" ItemsSource="{Binding Filters}"/>
-                                            </Grid>
+                                            <StackPanel>
+                                                <ItemsControl ItemsSource="{Binding Attributes}" ItemTemplate="{StaticResource AttributeTemplate}"/>
+                                                <ItemsControl Grid.Row="3" Grid.ColumnSpan="2"
+                                                              Padding="20,0,0,0" ItemsSource="{Binding Filters}"/>
+                                            </StackPanel>
                                         </Border>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>

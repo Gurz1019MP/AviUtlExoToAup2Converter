@@ -28,6 +28,7 @@ namespace AviUtlExoToAup2Converter.ViewModels
             _listener = new PropertyChangedWeakEventListener(_model)
             {
                 { nameof(_model.ExoItem), (s, e) => ExoItem = _model.ExoItem == null ? null : (ExoItemViewModel)ViewModelFactory.CreateViewModel(_model.ExoItem) },
+                { nameof(_model.ExoItem2), (s, e) => ExoItem2 = _model.ExoItem2 == null ? null : (ExoItem2ViewModel)ViewModelFactory.CreateViewModel(_model.ExoItem2) },
                 { nameof(_model.Aup2Item), (s, e) => Aup2Item = _model.Aup2Item == null ? null : (Aup2ItemViewModel)ViewModelFactory.CreateViewModel(_model.Aup2Item) },
             };
             CompositeDisposable.Add(_listener);
@@ -80,6 +81,22 @@ namespace AviUtlExoToAup2Converter.ViewModels
                 if (_ExoItem == value)
                     return;
                 _ExoItem = value;
+                RaisePropertyChanged();
+                ConvertCommand?.RaiseCanExecuteChanged();
+            }
+        }
+
+        private ExoItem2ViewModel? _ExoItem2;
+
+        public ExoItem2ViewModel? ExoItem2
+        {
+            get
+            { return _ExoItem2; }
+            set
+            {
+                if (_ExoItem2 == value)
+                    return;
+                _ExoItem2 = value;
                 RaisePropertyChanged();
                 ConvertCommand?.RaiseCanExecuteChanged();
             }

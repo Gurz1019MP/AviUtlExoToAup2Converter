@@ -29,6 +29,21 @@ namespace AviUtlExoToAup2Converter.Models
             }
         }
 
+        private ExoItem2? _ExoItem2;
+
+        public ExoItem2? ExoItem2
+        {
+            get
+            { return _ExoItem2; }
+            set
+            {
+                if (_ExoItem2 == value)
+                    return;
+                _ExoItem2 = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private Aup2Item? _Aup2Item;
 
         public Aup2Item? Aup2Item
@@ -50,7 +65,8 @@ namespace AviUtlExoToAup2Converter.Models
 
         public void Import(string path)
         {
-            ExoItem = ExoAccessObject.Deserialize(path);
+            //ExoItem = ExoAccessObject.Deserialize(path);
+            ExoItem2 = ExoAccessObject2.Deserialize(path);
         }
 
         public void Convert()

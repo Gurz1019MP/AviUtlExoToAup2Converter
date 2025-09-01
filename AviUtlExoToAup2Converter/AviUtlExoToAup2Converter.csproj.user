@@ -20,6 +20,9 @@
     <Compile Update="Models\Item\Aup2\Scene.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Models\Item\Exo\Filter\GeneralFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Models\MainModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -54,6 +57,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ViewModels\Item\Exo\Filter\DefaultPlayViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\Item\Exo\Filter\GeneralFilterViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ViewModels\Item\Exo\Filter\MovieFileViewModel.cs">

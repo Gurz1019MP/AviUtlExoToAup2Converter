@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-using AviUtlExoToAup2Converter.Models.DAO;
+﻿using AviUtlExoToAup2Converter.Models.DAO;
 using AviUtlExoToAup2Converter.Models.Item.Aup2;
 using AviUtlExoToAup2Converter.Models.Item.Exo;
 using Livet;

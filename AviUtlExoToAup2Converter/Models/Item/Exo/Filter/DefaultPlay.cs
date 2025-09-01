@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace AviUtlExoToAup2Converter.Models.Item.Exo.Filter
+﻿namespace AviUtlExoToAup2Converter.Models.Item.Exo.Filter
 {
     public class DefaultPlay : AbstractFilterItem
     {

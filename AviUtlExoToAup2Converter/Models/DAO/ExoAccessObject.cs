@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using AviUtlExoToAup2Converter.Models.Item.Exo;
+using AviUtlExoToAup2Converter.Models.Item.Exo.Filter;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using AviUtlExoToAup2Converter.Models.Item.Exo;
-using AviUtlExoToAup2Converter.Models.Item.Exo.Filter;
 
 namespace AviUtlExoToAup2Converter.Models.DAO
 {

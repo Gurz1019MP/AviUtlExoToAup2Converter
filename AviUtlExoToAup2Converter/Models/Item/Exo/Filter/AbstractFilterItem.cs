@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Livet;
+﻿using Livet;
 
 namespace AviUtlExoToAup2Converter.Models.Item.Exo.Filter
 {

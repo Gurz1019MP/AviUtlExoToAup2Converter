@@ -16,7 +16,7 @@
     <Compile Update="Models\Item\Aup2\Aup2Item.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Models\Item\Aup2\Effect\GeneralEffect.cs">
+    <Compile Update="Models\Item\Aup2\GeneralEffect.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Models\Item\Aup2\ObjectItem.cs">
@@ -28,7 +28,7 @@
     <Compile Update="ViewModels\Item\Aup2\Aup2ItemViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ViewModels\Item\Aup2\Effect\GeneralFilterViewModel.cs">
+    <Compile Update="ViewModels\Item\Aup2\GeneralFilterViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ViewModels\Item\Aup2\ObjectItemViewModel.cs">

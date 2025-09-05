@@ -1,6 +1,5 @@
 ﻿using AviUtlExoToAup2Converter.Models.Item;
 using AviUtlExoToAup2Converter.Models.Item.Exo;
-using AviUtlExoToAup2Converter.Models.Item.Exo.Filter;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;

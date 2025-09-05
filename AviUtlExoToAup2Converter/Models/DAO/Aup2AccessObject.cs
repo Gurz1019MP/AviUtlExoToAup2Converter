@@ -1,6 +1,5 @@
 ﻿using AviUtlExoToAup2Converter.Models.Item;
 using AviUtlExoToAup2Converter.Models.Item.Aup2;
-using AviUtlExoToAup2Converter.Models.Item.Aup2.Effect;
 using System.IO;
 using System.Text;
 

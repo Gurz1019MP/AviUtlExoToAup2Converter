@@ -1,6 +1,5 @@
 ﻿using AviUtlExoToAup2Converter.Models.Item;
 using AviUtlExoToAup2Converter.Models.Item.Aup2;
-using AviUtlExoToAup2Converter.ViewModels.Item.Aup2.Effect;
 using Livet;
 
 namespace AviUtlExoToAup2Converter.ViewModels.Item.Aup2

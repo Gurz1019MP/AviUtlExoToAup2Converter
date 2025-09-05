@@ -2,13 +2,13 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="Models\Item\Exo\Filter\GeneralFilter.cs">
+    <Compile Update="Models\Item\Exo\GeneralFilter.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Models\MainModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ViewModels\Item\Exo\Filter\GeneralFilterViewModel.cs">
+    <Compile Update="ViewModels\Item\Exo\GeneralFilterViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ViewModels\MainViewModel.cs">

@@ -1,8 +1,8 @@
 ﻿using Livet;
 
-namespace AviUtlExoToAup2Converter.Models.Item.Exo.Filter
+namespace AviUtlExoToAup2Converter.Models.Item.Aup2
 {
-    public class GeneralFilter(string name, IAttribute[] attributes) : NotificationObject
+    public class GeneralEffect(string name, IAttribute[] attributes) : NotificationObject
     {
         public string Name { get; set; } = name;
 

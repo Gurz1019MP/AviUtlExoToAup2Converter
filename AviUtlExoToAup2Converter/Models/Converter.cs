@@ -1,8 +1,6 @@
 ﻿using AviUtlExoToAup2Converter.Models.Item;
 using AviUtlExoToAup2Converter.Models.Item.Aup2;
-using AviUtlExoToAup2Converter.Models.Item.Aup2.Effect;
 using AviUtlExoToAup2Converter.Models.Item.Exo;
-using AviUtlExoToAup2Converter.Models.Item.Exo.Filter;
 
 namespace AviUtlExoToAup2Converter.Models
 {

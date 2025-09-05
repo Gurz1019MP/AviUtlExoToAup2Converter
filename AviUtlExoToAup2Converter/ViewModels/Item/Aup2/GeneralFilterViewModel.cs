@@ -1,8 +1,8 @@
 ﻿using AviUtlExoToAup2Converter.Models.Item;
-using AviUtlExoToAup2Converter.Models.Item.Aup2.Effect;
+using AviUtlExoToAup2Converter.Models.Item.Aup2;
 using Livet;
 
-namespace AviUtlExoToAup2Converter.ViewModels.Item.Aup2.Effect
+namespace AviUtlExoToAup2Converter.ViewModels.Item.Aup2
 {
     public class GeneralEffectViewModel(GeneralEffect model) : ViewModel
     {

@@ -1,4 +1,5 @@
-﻿using AviUtlExoToAup2Converter.Models.Item.Exo.Filter;
+﻿using AviUtlExoToAup2Converter.Models.Item;
+using AviUtlExoToAup2Converter.Models.Item.Exo.Filter;
 using Livet;
 
 namespace AviUtlExoToAup2Converter.ViewModels.Item.Exo.Filter

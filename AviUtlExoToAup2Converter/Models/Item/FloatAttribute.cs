@@ -1,4 +1,4 @@
-﻿namespace AviUtlExoToAup2Converter.Models.Item.Exo.Filter
+﻿namespace AviUtlExoToAup2Converter.Models.Item
 {
     public struct FloatAttribute(string name, float value, string format) : IAttribute
     {

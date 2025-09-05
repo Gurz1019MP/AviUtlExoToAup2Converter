@@ -6,11 +6,11 @@ using System.Text;
 
 namespace AviUtlExoToAup2Converter.Models.DAO
 {
-    internal static class Aup2AccessObject2
+    internal static class Aup2AccessObject
     {
         #region Method
 
-        public static void Serialize(Aup2Item2 aup2Item, string filePath)
+        public static void Serialize(Aup2Item aup2Item, string filePath)
         {
             List<string> contents = [
                 "[project]",
@@ -19,7 +19,7 @@ namespace AviUtlExoToAup2Converter.Models.DAO
             ];
 
             int sceneCounter = 0;
-            foreach(Scene2 scene in aup2Item.Scenes)
+            foreach(Scene scene in aup2Item.Scenes)
             {
                 contents.Add($"[scene.{sceneCounter}]");
                 contents.Add($"scene={sceneCounter}");
@@ -30,7 +30,7 @@ namespace AviUtlExoToAup2Converter.Models.DAO
                 contents.Add("display.camera=");
 
                 int objectCounter = 0;
-                foreach(ObjectItem2 objectItem in scene.ObjectItems)
+                foreach(ObjectItem objectItem in scene.ObjectItems)
                 {
                     contents.Add($"[{objectCounter}]");
                     foreach (IAttribute attribute in objectItem.Attributes)

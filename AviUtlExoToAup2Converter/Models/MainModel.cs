@@ -9,9 +9,9 @@ namespace AviUtlExoToAup2Converter.Models
     {
         #region Property
 
-        private ExoItem2? _ExoItem2;
+        private ExoItem? _ExoItem2;
 
-        public ExoItem2? ExoItem2
+        public ExoItem? ExoItem2
         {
             get
             { return _ExoItem2; }
@@ -24,9 +24,9 @@ namespace AviUtlExoToAup2Converter.Models
             }
         }
 
-        private Aup2Item2? _Aup2Item2;
+        private Aup2Item? _Aup2Item2;
 
-        public Aup2Item2? Aup2Item2
+        public Aup2Item? Aup2Item2
         {
             get
             { return _Aup2Item2; }
@@ -46,7 +46,7 @@ namespace AviUtlExoToAup2Converter.Models
         public void Import(string path)
         {
             //ExoItem = ExoAccessObject.Deserialize(path);
-            ExoItem2 = ExoAccessObject2.Deserialize(path);
+            ExoItem2 = ExoAccessObject.Deserialize(path);
         }
 
         public void Convert()
@@ -58,7 +58,7 @@ namespace AviUtlExoToAup2Converter.Models
         public void Export(string path)
         {
             if (Aup2Item2 == null) throw new ArgumentNullException();
-            Aup2AccessObject2.Serialize(Aup2Item2, path);
+            Aup2AccessObject.Serialize(Aup2Item2, path);
         }
 
         #endregion

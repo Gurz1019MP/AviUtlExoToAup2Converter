@@ -50,7 +50,7 @@
         <ScrollViewer Grid.Row="1">
             <ContentPresenter Content="{Binding ExoItem2}">
                 <ContentPresenter.ContentTemplate>
-                    <DataTemplate DataType="{x:Type vmie:ExoItem2ViewModel}">
+                    <DataTemplate DataType="{x:Type vmie:ExoItemViewModel}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -59,7 +59,7 @@
                             <ItemsControl ItemsSource="{Binding Attributes}" ItemTemplate="{StaticResource AttributeTemplate}"/>
                             <ItemsControl Grid.Row="1" ItemsSource="{Binding ObjectItems}">
                                 <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type vmie:ObjectItem2ViewModel}">
+                                    <DataTemplate DataType="{x:Type vmie:ObjectItemViewModel}">
                                         <Border BorderBrush="Gray"
                                     BorderThickness="1"
                                     Margin="2"
@@ -85,7 +85,7 @@
                     <DataTemplate DataType="vmia:Aup2Item2ViewModel">
                         <ItemsControl Grid.Row="1" ItemsSource="{Binding Scenes}">
                             <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="vmia:Scene2ViewModel">
+                                <DataTemplate DataType="vmia:SceneViewModel">
                                     <Border BorderBrush="LightGray"
                                             BorderThickness="1"
                                             Margin="2"
@@ -98,7 +98,7 @@
                                             <ItemsControl ItemsSource="{Binding Attributes}" ItemTemplate="{StaticResource AttributeTemplate}"/>
                                             <ItemsControl Grid.Row="1" ItemsSource="{Binding ObjectItems}">
                                                 <ItemsControl.ItemTemplate>
-                                                    <DataTemplate DataType="vmia:ObjectItem2ViewModel">
+                                                    <DataTemplate DataType="vmia:ObjectItemViewModel">
                                                         <Border BorderBrush="Gray"
                                                                 BorderThickness="1"
                                                                 Margin="2"

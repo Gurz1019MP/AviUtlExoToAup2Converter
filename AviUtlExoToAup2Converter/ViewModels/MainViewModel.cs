@@ -16,8 +16,8 @@ namespace AviUtlExoToAup2Converter.ViewModels
             _model = new MainModel();
             _listener = new PropertyChangedWeakEventListener(_model)
             {
-                { nameof(_model.ExoItem2), (s, e) => ExoItem2 = _model.ExoItem2 == null ? null : (ExoItem2ViewModel)ViewModelFactory.CreateViewModel(_model.ExoItem2) },
-                { nameof(_model.Aup2Item2), (s, e) => Aup2Item2 = _model.Aup2Item2 == null ? null : (Aup2Item2ViewModel)ViewModelFactory.CreateViewModel(_model.Aup2Item2) },
+                { nameof(_model.ExoItem2), (s, e) => ExoItem2 = _model.ExoItem2 == null ? null : (ExoItemViewModel)ViewModelFactory.CreateViewModel(_model.ExoItem2) },
+                { nameof(_model.Aup2Item2), (s, e) => Aup2Item2 = _model.Aup2Item2 == null ? null : (Aup2ItemViewModel)ViewModelFactory.CreateViewModel(_model.Aup2Item2) },
             };
             CompositeDisposable.Add(_listener);
         }
@@ -58,9 +58,9 @@ namespace AviUtlExoToAup2Converter.ViewModels
             }
         }
 
-        private ExoItem2ViewModel? _ExoItem2;
+        private ExoItemViewModel? _ExoItem2;
 
-        public ExoItem2ViewModel? ExoItem2
+        public ExoItemViewModel? ExoItem2
         {
             get
             { return _ExoItem2; }
@@ -74,9 +74,9 @@ namespace AviUtlExoToAup2Converter.ViewModels
             }
         }
 
-        private Aup2Item2ViewModel? _Aup2Item2;
+        private Aup2ItemViewModel? _Aup2Item2;
 
-        public Aup2Item2ViewModel? Aup2Item2
+        public Aup2ItemViewModel? Aup2Item2
         {
             get
             { return _Aup2Item2; }

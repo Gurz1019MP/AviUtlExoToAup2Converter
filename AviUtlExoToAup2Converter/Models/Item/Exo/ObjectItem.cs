@@ -3,7 +3,7 @@ using Livet;
 
 namespace AviUtlExoToAup2Converter.Models.Item.Exo
 {
-    public class ObjectItem2 : NotificationObject
+    public class ObjectItem : NotificationObject
     {
         public IAttribute[] Attributes { get; set; } = [];
 

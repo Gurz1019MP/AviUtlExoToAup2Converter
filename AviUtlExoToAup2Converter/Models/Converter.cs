@@ -6,13 +6,13 @@ using AviUtlExoToAup2Converter.Models.Item.Exo.Filter;
 
 namespace AviUtlExoToAup2Converter.Models
 {
-    public static class Converter2
+    public static class Converter
     {
-        public static Aup2Item2 Convert(this ExoItem2 baseItem)
+        public static Aup2Item Convert(this ExoItem baseItem)
         {
-            Aup2Item2 result = new Aup2Item2();
+            Aup2Item result = new Aup2Item();
 
-            Scene2 scene = new()
+            Scene scene = new()
             {
                 Attributes = [
                     new StringAttribute("name", "Root"),
@@ -29,10 +29,10 @@ namespace AviUtlExoToAup2Converter.Models
                 ]
             };
 
-            List<Item.Aup2.ObjectItem2> newObjectItems = [];
-            foreach(Item.Exo.ObjectItem2 baseObjectItem in baseItem.ObjectItems)
+            List<Item.Aup2.ObjectItem> newObjectItems = [];
+            foreach(Item.Exo.ObjectItem baseObjectItem in baseItem.ObjectItems)
             {
-                Item.Aup2.ObjectItem2 newObjectItem = new()
+                Item.Aup2.ObjectItem newObjectItem = new()
                 {
                     Attributes = [
                         new IntAttribute("layer", baseObjectItem.Attributes.GetValue<int>("layer") - 1),
@@ -125,7 +125,7 @@ namespace AviUtlExoToAup2Converter.Models
             return result;
         }
 
-        private static float FrameToTime(int frame, ExoItem2 exoItem)
+        private static float FrameToTime(int frame, ExoItem exoItem)
         {
             if (frame == 1)
             {

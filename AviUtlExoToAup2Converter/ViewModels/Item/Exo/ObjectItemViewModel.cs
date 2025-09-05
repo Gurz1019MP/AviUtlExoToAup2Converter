@@ -5,10 +5,10 @@ using Livet;
 
 namespace AviUtlExoToAup2Converter.ViewModels.Item.Exo
 {
-    public class ObjectItem2ViewModel : ViewModel
+    public class ObjectItemViewModel : ViewModel
     {
         #region .ctor
-        public ObjectItem2ViewModel(ObjectItem2 model)
+        public ObjectItemViewModel(ObjectItem model)
         {
             _model = model;
             Attributes = model.Attributes;
@@ -25,7 +25,7 @@ namespace AviUtlExoToAup2Converter.ViewModels.Item.Exo
 
         #region Field
 
-        private readonly ObjectItem2 _model;
+        private readonly ObjectItem _model;
 
         #endregion
     }

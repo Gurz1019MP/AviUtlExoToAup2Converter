@@ -4,15 +4,15 @@ using Livet;
 
 namespace AviUtlExoToAup2Converter.ViewModels.Item.Exo
 {
-    public class ExoItem2ViewModel : ViewModel
+    public class ExoItemViewModel : ViewModel
     {
         #region .ctor
 
-        public ExoItem2ViewModel(ExoItem2 model)
+        public ExoItemViewModel(ExoItem model)
         {
             _model = model;
             Attributes = model.Attributes;
-            ObjectItems = [.. _model.ObjectItems.CreateViewModels().Cast<ObjectItem2ViewModel>()];
+            ObjectItems = [.. _model.ObjectItems.CreateViewModels().Cast<ObjectItemViewModel>()];
         }
 
         #endregion
@@ -21,13 +21,13 @@ namespace AviUtlExoToAup2Converter.ViewModels.Item.Exo
 
         public IAttribute[] Attributes { get; }
 
-        public ObjectItem2ViewModel[] ObjectItems { get; }
+        public ObjectItemViewModel[] ObjectItems { get; }
 
         #endregion
 
         #region Field
 
-        private readonly ExoItem2 _model;
+        private readonly ExoItem _model;
 
         #endregion
     }

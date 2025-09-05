@@ -1,18 +1,19 @@
 ﻿using AviUtlExoToAup2Converter.Models.Item;
 using AviUtlExoToAup2Converter.Models.Item.Aup2;
+using AviUtlExoToAup2Converter.ViewModels.Item.Aup2.Effect;
 using Livet;
 
 namespace AviUtlExoToAup2Converter.ViewModels.Item.Aup2
 {
-    public class Scene2ViewModel : ViewModel
+    public class ObjectItemViewModel : ViewModel
     {
         #region .ctor
 
-        public Scene2ViewModel(Scene2 model)
+        public ObjectItemViewModel(ObjectItem model)
         {
             _model = model;
             Attributes = _model.Attributes;
-            ObjectItems = [.. _model.ObjectItems.CreateViewModels().Cast<ObjectItem2ViewModel>()];
+            Effects = [.. _model.Effects.CreateViewModels().Cast<GeneralEffectViewModel>()];
         }
 
         #endregion
@@ -20,13 +21,13 @@ namespace AviUtlExoToAup2Converter.ViewModels.Item.Aup2
         #region Property
 
         public IAttribute[] Attributes { get; }
-        public ObjectItem2ViewModel[] ObjectItems { get; }
+        public GeneralEffectViewModel[] Effects { get; }
 
         #endregion
 
         #region Field
 
-        private readonly Scene2 _model;
+        private readonly ObjectItem _model;
 
         #endregion
     }

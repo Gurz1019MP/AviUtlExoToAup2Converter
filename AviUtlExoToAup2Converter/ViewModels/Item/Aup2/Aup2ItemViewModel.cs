@@ -3,27 +3,27 @@ using Livet;
 
 namespace AviUtlExoToAup2Converter.ViewModels.Item.Aup2
 {
-    public class Aup2Item2ViewModel : ViewModel
+    public class Aup2ItemViewModel : ViewModel
     {
         #region .ctor
 
-        public Aup2Item2ViewModel(Aup2Item2 model)
+        public Aup2ItemViewModel(Aup2Item model)
         {
             _model = model;
-            Scenes = [.. _model.Scenes.CreateViewModels().Cast<Scene2ViewModel>()];
+            Scenes = [.. _model.Scenes.CreateViewModels().Cast<SceneViewModel>()];
         }
 
         #endregion
 
         #region Property
 
-        public Scene2ViewModel[] Scenes { get; }
+        public SceneViewModel[] Scenes { get; }
 
         #endregion
 
         #region Field
 
-        private readonly Aup2Item2 _model;
+        private readonly Aup2Item _model;
 
         #endregion
     }

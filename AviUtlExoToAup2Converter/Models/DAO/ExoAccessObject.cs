@@ -7,17 +7,17 @@ using System.Text.RegularExpressions;
 
 namespace AviUtlExoToAup2Converter.Models.DAO
 {
-    internal static class ExoAccessObject2
+    internal static class ExoAccessObject
     {
         #region Method
 
-        public static ExoItem2? Deserialize(string filePath)
+        public static ExoItem? Deserialize(string filePath)
         {
             if (!File.Exists(filePath)) return null;
 
-            ExoItem2 result = new();
-            List<ObjectItem2> objectItems = [];
-            ObjectItem2? objectItem = null;
+            ExoItem result = new();
+            List<ObjectItem> objectItems = [];
+            ObjectItem? objectItem = null;
             List<GeneralFilter> filterItems = [];
             GeneralFilter? filterItem = null;
             List<IAttribute> attributes = [];
@@ -65,7 +65,7 @@ namespace AviUtlExoToAup2Converter.Models.DAO
                         }
 
                         mode = ReadMode.Object;
-                        objectItem = new ObjectItem2();
+                        objectItem = new ObjectItem();
                     }
                     else if (float.TryParse(number, out float filterNumber))
                     {

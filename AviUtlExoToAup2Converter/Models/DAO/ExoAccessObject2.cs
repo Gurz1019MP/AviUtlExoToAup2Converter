@@ -149,4 +149,11 @@ namespace AviUtlExoToAup2Converter.Models.DAO
 
         #endregion
     }
+
+    internal enum ReadMode
+    {
+        Exo,
+        Object,
+        Filter
+    }
 }

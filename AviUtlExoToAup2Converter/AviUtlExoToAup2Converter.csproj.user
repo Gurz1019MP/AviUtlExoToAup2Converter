@@ -2,70 +2,13 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="Models\Item\Aup2\Aup2Item.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Models\Item\Aup2\Effect\DefaultDraw.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Models\Item\Aup2\Effect\DefaultPlay.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Models\Item\Aup2\Effect\MovieFile.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Models\Item\Aup2\ObjectItem.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Models\Item\Aup2\Scene.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Models\Item\Exo\Filter\GeneralFilter.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Models\MainModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ViewModels\Item\Aup2\Aup2ItemViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\Item\Aup2\Effect\DefaultDrawViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\Item\Aup2\Effect\DefaultPlayViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\Item\Aup2\Effect\MovieFileViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\Item\Aup2\ObjectItemViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\Item\Aup2\SceneViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\Item\Exo\ExoItemViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\Item\Exo\Filter\AbstractFilterItemViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\Item\Exo\Filter\AudioFileViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\Item\Exo\Filter\DefaultDrawViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\Item\Exo\Filter\DefaultPlayViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="ViewModels\Item\Exo\Filter\GeneralFilterViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\Item\Exo\Filter\MovieFileViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\Item\Exo\ObjectItemViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ViewModels\MainViewModel.cs">

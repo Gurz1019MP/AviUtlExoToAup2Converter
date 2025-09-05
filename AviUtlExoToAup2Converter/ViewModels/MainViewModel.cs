@@ -16,9 +16,7 @@ namespace AviUtlExoToAup2Converter.ViewModels
             _model = new MainModel();
             _listener = new PropertyChangedWeakEventListener(_model)
             {
-                { nameof(_model.ExoItem), (s, e) => ExoItem = _model.ExoItem == null ? null : (ExoItemViewModel)ViewModelFactory.CreateViewModel(_model.ExoItem) },
                 { nameof(_model.ExoItem2), (s, e) => ExoItem2 = _model.ExoItem2 == null ? null : (ExoItem2ViewModel)ViewModelFactory.CreateViewModel(_model.ExoItem2) },
-                { nameof(_model.Aup2Item), (s, e) => Aup2Item = _model.Aup2Item == null ? null : (Aup2ItemViewModel)ViewModelFactory.CreateViewModel(_model.Aup2Item) },
                 { nameof(_model.Aup2Item2), (s, e) => Aup2Item2 = _model.Aup2Item2 == null ? null : (Aup2Item2ViewModel)ViewModelFactory.CreateViewModel(_model.Aup2Item2) },
             };
             CompositeDisposable.Add(_listener);
@@ -60,22 +58,6 @@ namespace AviUtlExoToAup2Converter.ViewModels
             }
         }
 
-        private ExoItemViewModel? _ExoItem;
-
-        public ExoItemViewModel? ExoItem
-        {
-            get
-            { return _ExoItem; }
-            set
-            { 
-                if (_ExoItem == value)
-                    return;
-                _ExoItem = value;
-                RaisePropertyChanged();
-                ConvertCommand?.RaiseCanExecuteChanged();
-            }
-        }
-
         private ExoItem2ViewModel? _ExoItem2;
 
         public ExoItem2ViewModel? ExoItem2
@@ -89,23 +71,6 @@ namespace AviUtlExoToAup2Converter.ViewModels
                 _ExoItem2 = value;
                 RaisePropertyChanged();
                 ConvertCommand?.RaiseCanExecuteChanged();
-            }
-        }
-
-
-        private Aup2ItemViewModel? _Aup2Item;
-
-        public Aup2ItemViewModel? Aup2Item
-        {
-            get
-            { return _Aup2Item; }
-            set
-            { 
-                if (_Aup2Item == value)
-                    return;
-                _Aup2Item = value;
-                RaisePropertyChanged();
-                ExportCommand?.RaiseCanExecuteChanged();
             }
         }
 

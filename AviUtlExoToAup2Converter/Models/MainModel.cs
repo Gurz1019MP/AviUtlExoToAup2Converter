@@ -9,21 +9,6 @@ namespace AviUtlExoToAup2Converter.Models
     {
         #region Property
 
-        private ExoItem? _ExoItem;
-
-        public ExoItem? ExoItem
-        {
-            get
-            { return _ExoItem; }
-            set
-            { 
-                if (_ExoItem == value)
-                    return;
-                _ExoItem = value;
-                RaisePropertyChanged();
-            }
-        }
-
         private ExoItem2? _ExoItem2;
 
         public ExoItem2? ExoItem2
@@ -35,21 +20,6 @@ namespace AviUtlExoToAup2Converter.Models
                 if (_ExoItem2 == value)
                     return;
                 _ExoItem2 = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private Aup2Item? _Aup2Item;
-
-        public Aup2Item? Aup2Item
-        {
-            get
-            { return _Aup2Item; }
-            set
-            { 
-                if (_Aup2Item == value)
-                    return;
-                _Aup2Item = value;
                 RaisePropertyChanged();
             }
         }

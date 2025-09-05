@@ -46,12 +46,10 @@ namespace AviUtlExoToAup2Converter.Models
                 {
                     if (filter.Name == "動画ファイル")
                     {
-                        float start = FrameToTime(filter.Attributes.GetValue<int>("再生位置"), baseItem);
-                        float end = start + FrameToTime(baseObjectItem.Attributes.GetValue<int>("end") - (baseObjectItem.Attributes.GetValue<int>("start") - 1), baseItem);
                         GeneralEffect effect = new("動画ファイル", [
                             new PlayPositionAttribute("再生位置", new PlayPosition(){
-                                Start = start,
-                                End = end,
+                                Start = FrameToTime(filter.Attributes.GetValue<int>("再生位置"), baseItem),
+                                End = FrameToTime(filter.Attributes.GetValue<int>("再生位置"), baseItem) + FrameToTime(baseObjectItem.Attributes.GetValue<int>("end") - (baseObjectItem.Attributes.GetValue<int>("start") - 1), baseItem),
                                 Range = 0
                             }),
                             new FloatAttribute("再生速度", filter.Attributes.GetValue<float>("再生速度"), "F2"),
@@ -87,11 +85,10 @@ namespace AviUtlExoToAup2Converter.Models
                             GeneralFilter? alimentMoviefilter = baseItem.ObjectItems.SelectMany(i => i.Filters).FirstOrDefault(f => f.Name == "動画ファイル");
                             if (alimentMoviefilter != null)
                             {
-                                float end = filter.Attributes.GetValue<float>("再生位置") + FrameToTime(baseObjectItem.Attributes.GetValue<int>("end") - (baseObjectItem.Attributes.GetValue<int>("start") - 1), baseItem);
                                 GeneralEffect effect = new("動画ファイル", [
                                     new PlayPositionAttribute("再生位置", new PlayPosition(){
                                         Start = filter.Attributes.GetValue<float>("再生位置"),
-                                        End = end,
+                                        End = filter.Attributes.GetValue<float>("再生位置") + FrameToTime(baseObjectItem.Attributes.GetValue<int>("end") - (baseObjectItem.Attributes.GetValue<int>("start") - 1), baseItem),
                                         Range = 0
                                     }),
                                     new FloatAttribute("再生速度", filter.Attributes.GetValue<float>("再生速度"), "F2"),

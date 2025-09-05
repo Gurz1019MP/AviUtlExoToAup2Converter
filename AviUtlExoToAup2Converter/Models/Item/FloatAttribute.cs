@@ -1,6 +1,6 @@
 ﻿namespace AviUtlExoToAup2Converter.Models.Item
 {
-    public struct FloatAttribute(string name, float value, string format) : IAttribute
+    public struct FloatAttribute(string name, float value, string format) : IAttribute<float>
     {
         public string Name { get; private set; } = name;
 

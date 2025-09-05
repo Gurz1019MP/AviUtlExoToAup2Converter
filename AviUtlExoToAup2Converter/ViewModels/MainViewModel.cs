@@ -19,6 +19,7 @@ namespace AviUtlExoToAup2Converter.ViewModels
                 { nameof(_model.ExoItem), (s, e) => ExoItem = _model.ExoItem == null ? null : (ExoItemViewModel)ViewModelFactory.CreateViewModel(_model.ExoItem) },
                 { nameof(_model.ExoItem2), (s, e) => ExoItem2 = _model.ExoItem2 == null ? null : (ExoItem2ViewModel)ViewModelFactory.CreateViewModel(_model.ExoItem2) },
                 { nameof(_model.Aup2Item), (s, e) => Aup2Item = _model.Aup2Item == null ? null : (Aup2ItemViewModel)ViewModelFactory.CreateViewModel(_model.Aup2Item) },
+                { nameof(_model.Aup2Item2), (s, e) => Aup2Item2 = _model.Aup2Item2 == null ? null : (Aup2Item2ViewModel)ViewModelFactory.CreateViewModel(_model.Aup2Item2) },
             };
             CompositeDisposable.Add(_listener);
         }
@@ -108,6 +109,21 @@ namespace AviUtlExoToAup2Converter.ViewModels
             }
         }
 
+        private Aup2Item2ViewModel? _Aup2Item2;
+
+        public Aup2Item2ViewModel? Aup2Item2
+        {
+            get
+            { return _Aup2Item2; }
+            set
+            {
+                if (_Aup2Item2 == value)
+                    return;
+                _Aup2Item2 = value;
+                RaisePropertyChanged();
+                ExportCommand?.RaiseCanExecuteChanged();
+            }
+        }
 
         #endregion
 
@@ -154,7 +170,8 @@ namespace AviUtlExoToAup2Converter.ViewModels
 
         public bool CanConvert()
         {
-            return ExoItem != null;
+            return ExoItem2 != null;
+            //return ExoItem != null;
         }
 
         public void Convert()
@@ -179,7 +196,8 @@ namespace AviUtlExoToAup2Converter.ViewModels
 
         public bool CanExport()
         {
-            return Aup2Item != null && Aup2Path != null;
+            return Aup2Item2 != null && Aup2Path != null;
+            //return Aup2Item != null && Aup2Path != null;
         }
 
         public void Export()

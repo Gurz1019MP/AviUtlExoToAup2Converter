@@ -145,7 +145,7 @@ namespace AviUtlExoToAup2Converter.Models.DAO
 
         private static readonly Regex _objectNumberRegex = new(@"^\[(?<number>.+)\]$");
 
-        private static readonly Regex _propertyRegex = new(@"^(?<propertyName>.+)=(?<value>.+)$");
+        private static readonly Regex _propertyRegex = new(@"^(?<propertyName>.+)=(?<value>.*)$");
 
         #endregion
     }

@@ -130,4 +130,12 @@
             </Grid>
         </Expander>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vmiae:GeneralEffectViewModel}">
+        <Expander BorderBrush="DarkGray"
+          BorderThickness="1"
+          Margin="2"
+          Header="{Binding Name}">
+            <ItemsControl ItemsSource="{Binding Attributes}" ItemTemplate="{StaticResource AttributeTemplate}"/>
+        </Expander>
+    </DataTemplate>
 </ResourceDictionary>

@@ -54,6 +54,21 @@ namespace AviUtlExoToAup2Converter.Models
             }
         }
 
+        private Aup2Item2? _Aup2Item2;
+
+        public Aup2Item2? Aup2Item2
+        {
+            get
+            { return _Aup2Item2; }
+            set
+            {
+                if (_Aup2Item2 == value)
+                    return;
+                _Aup2Item2 = value;
+                RaisePropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Method
@@ -66,14 +81,14 @@ namespace AviUtlExoToAup2Converter.Models
 
         public void Convert()
         {
-            if (ExoItem == null) throw new ArgumentNullException();
-            Aup2Item = ExoItem.Convert();
+            if (ExoItem2 == null) throw new ArgumentNullException();
+            Aup2Item2 = ExoItem2.Convert();
         }
 
         public void Export(string path)
         {
-            if (Aup2Item == null) throw new ArgumentNullException();
-            Aup2AccessObject.Serialize(Aup2Item, path);
+            if (Aup2Item2 == null) throw new ArgumentNullException();
+            Aup2AccessObject2.Serialize(Aup2Item2, path);
         }
 
         #endregion

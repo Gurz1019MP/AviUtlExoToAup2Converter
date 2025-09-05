@@ -1,6 +1,6 @@
 ﻿namespace AviUtlExoToAup2Converter.Models.Item
 {
-    public struct IntAttribute(string name, int value) : IAttribute
+    public struct IntAttribute(string name, int value) : IAttribute<int>
     {
         public string Name { get; private set; } = name;
 

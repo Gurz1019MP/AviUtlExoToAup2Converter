@@ -13,6 +13,30 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Models\Item\Aup2\Aup2Item2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Models\Item\Aup2\Effect\GeneralEffect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Models\Item\Aup2\ObjectItem2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Models\Item\Aup2\Scene2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\Item\Aup2\Aup2Item2ViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\Item\Aup2\Effect\GeneralFilterViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\Item\Aup2\ObjectItem2ViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\Item\Aup2\Scene2ViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ViewModels\Item\Exo\ExoItem2ViewModel.cs">
       <SubType>Code</SubType>
     </Compile>

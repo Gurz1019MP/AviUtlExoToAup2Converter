@@ -80,12 +80,12 @@
         </ScrollViewer>
         <Button Grid.Row="1" Grid.Column="1" Content="変換" Command="{Binding ConvertCommand}"/>
         <ScrollViewer Grid.Row="1" Grid.Column="2">
-            <ContentPresenter Content="{Binding Aup2Item}">
+            <ContentPresenter Content="{Binding Aup2Item2}">
                 <ContentPresenter.ContentTemplate>
-                    <DataTemplate DataType="vmia:Aup2ItemViewModel">
+                    <DataTemplate DataType="vmia:Aup2Item2ViewModel">
                         <ItemsControl Grid.Row="1" ItemsSource="{Binding Scenes}">
                             <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="vmia:SceneViewModel">
+                                <DataTemplate DataType="vmia:Scene2ViewModel">
                                     <Border BorderBrush="LightGray"
                                             BorderThickness="1"
                                             Margin="2"
@@ -93,99 +93,12 @@
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="*"/>
                                             </Grid.RowDefinitions>
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <TextBlock Text="Id"/>
-                                                <TextBlock Grid.Column="1" Text="{Binding Id}"/>
-                                                <TextBlock Grid.Column="2" Text="Name"/>
-                                                <TextBlock Grid.Column="3" Text="{Binding Name}"/>
-                                            </Grid>
-                                            <GroupBox Grid.Row="1" Header="Video">
-                                                <Grid>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="Auto"/>
-                                                        <RowDefinition Height="Auto"/>
-                                                    </Grid.RowDefinitions>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <TextBlock Text="Width"/>
-                                                    <TextBlock Grid.Column="1" Text="{Binding VideoWidth}"/>
-                                                    <TextBlock Grid.Column="2" Text="Height"/>
-                                                    <TextBlock Grid.Column="3" Text="{Binding VideoHeight}"/>
-                                                    <TextBlock Grid.Row="1" Text="Rate"/>
-                                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding VideoRate}"/>
-                                                    <TextBlock Grid.Row="1" Grid.Column="2" Text="Scale"/>
-                                                    <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding VideoScale}"/>
-                                                </Grid>
-                                            </GroupBox>
-                                            <Grid Grid.Row="2">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <TextBlock Text="audio.rate"/>
-                                                <TextBlock Grid.Column="1" Text="{Binding AudioRate}"/>
-                                                <TextBlock Grid.Column="2" Text="cursor.frame"/>
-                                                <TextBlock Grid.Column="3" Text="{Binding CursorFrame}"/>
-                                            </Grid>
-                                            <GroupBox Grid.Row="3" Header="Display">
-                                                <StackPanel>
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                        </Grid.ColumnDefinitions>
-                                                        <TextBlock Text="frame"/>
-                                                        <TextBlock Grid.Column="1" Text="{Binding DisplayFrame}"/>
-                                                        <TextBlock Grid.Column="2" Text="layer"/>
-                                                        <TextBlock Grid.Column="3" Text="{Binding DisplayLayer}"/>
-                                                    </Grid>
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                        </Grid.ColumnDefinitions>
-                                                        <TextBlock Text="zoom"/>
-                                                        <TextBlock Grid.Column="1" Text="{Binding DisplayZoom}"/>
-                                                        <TextBlock Grid.Column="2" Text="order"/>
-                                                        <TextBlock Grid.Column="3" Text="{Binding DisplayOrder}"/>
-                                                        <TextBlock Grid.Column="4" Text="camera"/>
-                                                        <TextBlock Grid.Column="5" Text="{Binding DisplayCamera}"/>
-                                                    </Grid>
-                                                </StackPanel>
-                                            </GroupBox>
-                                            <ItemsControl Grid.Row="4" ItemsSource="{Binding ObjectItems}">
+                                            <ItemsControl ItemsSource="{Binding Attributes}" ItemTemplate="{StaticResource AttributeTemplate}"/>
+                                            <ItemsControl Grid.Row="1" ItemsSource="{Binding ObjectItems}">
                                                 <ItemsControl.ItemTemplate>
-                                                    <DataTemplate DataType="vmia:ObjectItemViewModel">
+                                                    <DataTemplate DataType="vmia:ObjectItem2ViewModel">
                                                         <Border BorderBrush="Gray"
                                                                 BorderThickness="1"
                                                                 Margin="2"
@@ -193,24 +106,10 @@
                                                             <Grid>
                                                                 <Grid.RowDefinitions>
                                                                     <RowDefinition Height="Auto"/>
-                                                                    <RowDefinition Height="Auto"/>
-                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="*"/>
                                                                 </Grid.RowDefinitions>
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="*"/>
-                                                                    <ColumnDefinition Width="*"/>
-                                                                    <ColumnDefinition Width="*"/>
-                                                                    <ColumnDefinition Width="*"/>
-                                                                </Grid.ColumnDefinitions>
-                                                                <TextBlock Text="Layer"/>
-                                                                <TextBlock Grid.Column="1" Text="{Binding Layer}"/>
-                                                                <TextBlock Grid.Column="2" Text="Focus"/>
-                                                                <TextBlock Grid.Column="3" Text="{Binding IsFocus}"/>
-                                                                <TextBlock Grid.Row="1" Text="Frame.start"/>
-                                                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Frame.Start}"/>
-                                                                <TextBlock Grid.Row="1" Grid.Column="2" Text="Frame.end"/>
-                                                                <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding Frame.End}"/>
-                                                                <ItemsControl Grid.Row="2" Grid.ColumnSpan="4"
+                                                                <ItemsControl ItemsSource="{Binding Attributes}" ItemTemplate="{StaticResource AttributeTemplate}"/>
+                                                                <ItemsControl Grid.Row="1" Grid.ColumnSpan="4"
                                                                               Padding="20,0,0,0" ItemsSource="{Binding Effects}"/>
                                                             </Grid>
                                                         </Border>

@@ -6,7 +6,7 @@ namespace AviUtlExoToAup2Converter.Models.Convert
     public class StringValue : IValue<string>
     {
         [DataMember]
-        public string Value { get; set; } = string.Empty;
+        public required string Value { get; set; }
 
         public string Invoke(Dictionary<string, object> proxy)
         {

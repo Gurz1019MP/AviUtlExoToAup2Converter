@@ -3,15 +3,19 @@ using System.Runtime.Serialization;
 
 namespace AviUtlExoToAup2Converter.Models.Convert
 {
+    [DataContract]
     public class PlayPositionMapper : IMapper
     {
         [DataMember]
         public string To { get; set; } = string.Empty;
 
+        [DataMember]
         public required IValue<float> Start { get; set; }
 
+        [DataMember]
         public required IValue<float> End {  get; set; }
 
+        [DataMember]
         public required IValue<int> Range { get; set; }
 
         public IAttribute Map(Dictionary<string, object> proxy)

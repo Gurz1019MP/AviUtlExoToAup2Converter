@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConvertLogicRoot xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/AviUtlExoToAup2Converter.Models.Convert">
+  <LogicItems>
+    <LogicItem>
+      <Condition i:type="ConditionEqualOfstring">
+        <Operand1 i:type="GetPropertyOfstring">
+          <Property>Name</Property>
+          <Reference>filter</Reference>
+        </Operand1>
+        <Operand2 i:type="StringValue">
+          <Value>動画ファイル</Value>
+        </Operand2>
+      </Condition>
+      <EffectName>動画ファイル</EffectName>
+      <LocalVars />
+      <Mappers xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+        <d4p1:anyType i:type="PlayPositionMapper">
+          <End i:type="CalcSumOffloat">
+            <Operand1 i:type="FrameToTime">
+              <Frame i:type="GetAttributeValueOfint">
+                <From>再生位置</From>
+                <Reference>filter</Reference>
+              </Frame>
+            </Operand1>
+            <Operand2 i:type="FrameToTime">
+              <Frame i:type="CalcSubOfint">
+                <Operand1 i:type="CalcSubOfint">
+                  <Operand1 i:type="GetAttributeValueOfint">
+                    <From>end</From>
+                    <Reference>baseObjectItem</Reference>
+                  </Operand1>
+                  <Operand2 i:type="GetAttributeValueOfint">
+                    <From>start</From>
+                    <Reference>baseObjectItem</Reference>
+                  </Operand2>
+                </Operand1>
+                <Operand2 i:type="IntValue">
+                  <Value>1</Value>
+                </Operand2>
+              </Frame>
+            </Operand2>
+          </End>
+          <Range i:type="IntValue">
+            <Value>0</Value>
+          </Range>
+          <Start i:type="FrameToTime">
+            <Frame i:type="GetAttributeValueOfint">
+              <From>再生位置</From>
+              <Reference>filter</Reference>
+            </Frame>
+          </Start>
+          <To>再生位置</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F2</Format>
+          <From i:type="GetAttributeValueOffloat">
+            <From>再生速度</From>
+            <Reference>filter</Reference>
+          </From>
+          <To>再生速度</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="StringMapper">
+          <From i:type="GetAttributeValueOfstring">
+            <From>file</From>
+            <Reference>filter</Reference>
+          </From>
+          <To>ファイル</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="IntMapper">
+          <From i:type="GetAttributeValueOfint">
+            <From>ループ再生</From>
+            <Reference>filter</Reference>
+          </From>
+          <To>ループ再生</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="IntMapper">
+          <From i:type="IntValue">
+            <Value>1</Value>
+          </From>
+          <To>音声付き</To>
+        </d4p1:anyType>
+      </Mappers>
+    </LogicItem>
+    <LogicItem>
+      <Condition i:type="ConditionEqualOfstring">
+        <Operand1 i:type="GetPropertyOfstring">
+          <Property>Name</Property>
+          <Reference>filter</Reference>
+        </Operand1>
+        <Operand2 i:type="StringValue">
+          <Value>標準描画</Value>
+        </Operand2>
+      </Condition>
+      <EffectName>映像再生</EffectName>
+      <LocalVars />
+      <Mappers xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F2</Format>
+          <From i:type="GetAttributeValueOffloat">
+            <From>X</From>
+            <Reference>filter</Reference>
+          </From>
+          <To>X</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F2</Format>
+          <From i:type="GetAttributeValueOffloat">
+            <From>Y</From>
+            <Reference>filter</Reference>
+          </From>
+          <To>Y</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F2</Format>
+          <From i:type="GetAttributeValueOffloat">
+            <From>Z</From>
+            <Reference>filter</Reference>
+          </From>
+          <To>Z</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F2</Format>
+          <From i:type="FloatValue">
+            <Value>0</Value>
+          </From>
+          <To>中心X</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F2</Format>
+          <From i:type="FloatValue">
+            <Value>0</Value>
+          </From>
+          <To>中心Y</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F2</Format>
+          <From i:type="FloatValue">
+            <Value>0</Value>
+          </From>
+          <To>中心Z</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F2</Format>
+          <From i:type="FloatValue">
+            <Value>0</Value>
+          </From>
+          <To>X軸回転</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F2</Format>
+          <From i:type="FloatValue">
+            <Value>0</Value>
+          </From>
+          <To>Y軸回転</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F2</Format>
+          <From i:type="GetAttributeValueOffloat">
+            <From>回転</From>
+            <Reference>filter</Reference>
+          </From>
+          <To>Z軸回転</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F3</Format>
+          <From i:type="GetAttributeValueOffloat">
+            <From>拡大率</From>
+            <Reference>filter</Reference>
+          </From>
+          <To>拡大率</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F3</Format>
+          <From i:type="FloatValue">
+            <Value>0</Value>
+          </From>
+          <To>縦横比</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F2</Format>
+          <From i:type="GetAttributeValueOffloat">
+            <From>透明度</From>
+            <Reference>filter</Reference>
+          </From>
+          <To>透明度</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="StringMapper">
+          <From i:type="BlendModeValue">
+            <Value i:type="GetAttributeValueOfint">
+              <From>blend</From>
+              <Reference>filter</Reference>
+            </Value>
+          </From>
+          <To>合成モード</To>
+        </d4p1:anyType>
+      </Mappers>
+    </LogicItem>
+    <LogicItem>
+      <Condition i:type="BoolConditionEqual">
+        <Operand1 i:type="ConditionEqualOfstring">
+          <Operand1 i:type="GetPropertyOfstring">
+            <Property>Name</Property>
+            <Reference>filter</Reference>
+          </Operand1>
+          <Operand2 i:type="StringValue">
+            <Value>音声ファイル</Value>
+          </Operand2>
+        </Operand1>
+        <Operand2 i:type="ConditionEqualOfint">
+          <Operand1 i:type="GetAttributeValueOfint">
+            <From>動画ファイルと連携</From>
+            <Reference>filter</Reference>
+          </Operand1>
+          <Operand2 i:type="IntValue">
+            <Value>1</Value>
+          </Operand2>
+        </Operand2>
+      </Condition>
+      <EffectName>動画ファイル</EffectName>
+      <LocalVars>
+        <Variable>
+          <Key>alimentMovieFilter</Key>
+          <Value i:type="FindFirstFilterByName">
+            <Name>動画ファイル</Name>
+          </Value>
+        </Variable>
+      </LocalVars>
+      <Mappers xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+        <d4p1:anyType i:type="PlayPositionMapper">
+          <End i:type="CalcSumOffloat">
+            <Operand1 i:type="GetAttributeValueOffloat">
+              <From>再生位置</From>
+              <Reference>filter</Reference>
+            </Operand1>
+            <Operand2 i:type="FrameToTime">
+              <Frame i:type="CalcSubOfint">
+                <Operand1 i:type="CalcSubOfint">
+                  <Operand1 i:type="GetAttributeValueOfint">
+                    <From>end</From>
+                    <Reference>baseObjectItem</Reference>
+                  </Operand1>
+                  <Operand2 i:type="GetAttributeValueOfint">
+                    <From>start</From>
+                    <Reference>baseObjectItem</Reference>
+                  </Operand2>
+                </Operand1>
+                <Operand2 i:type="IntValue">
+                  <Value>1</Value>
+                </Operand2>
+              </Frame>
+            </Operand2>
+          </End>
+          <Range i:type="IntValue">
+            <Value>0</Value>
+          </Range>
+          <Start i:type="GetAttributeValueOffloat">
+            <From>再生位置</From>
+            <Reference>filter</Reference>
+          </Start>
+          <To></To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F2</Format>
+          <From i:type="GetAttributeValueOffloat">
+            <From>再生速度</From>
+            <Reference>filter</Reference>
+          </From>
+          <To>再生速度</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="StringMapper">
+          <From i:type="GetAttributeValueOfstring">
+            <From>file</From>
+            <Reference>alimentMovieFilter</Reference>
+          </From>
+          <To>ファイル</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="IntMapper">
+          <From i:type="IntValue">
+            <Value>0</Value>
+          </From>
+          <To>トラック</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="IntMapper">
+          <From i:type="GetAttributeValueOfint">
+            <From>ループ再生</From>
+            <Reference>filter</Reference>
+          </From>
+          <To>ループ再生</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="IntMapper">
+          <From i:type="IntValue">
+            <Value>1</Value>
+          </From>
+          <To>音声付き</To>
+        </d4p1:anyType>
+      </Mappers>
+    </LogicItem>
+    <LogicItem>
+      <Condition i:type="ConditionEqualOfstring">
+        <Operand1 i:type="GetPropertyOfstring">
+          <Property>Name</Property>
+          <Reference>filter</Reference>
+        </Operand1>
+        <Operand2 i:type="StringValue">
+          <Value>標準再生</Value>
+        </Operand2>
+      </Condition>
+      <EffectName>音声再生</EffectName>
+      <LocalVars />
+      <Mappers xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F2</Format>
+          <From i:type="GetAttributeValueOffloat">
+            <From>音量</From>
+            <Reference>filter</Reference>
+          </From>
+          <To>音量</To>
+        </d4p1:anyType>
+        <d4p1:anyType i:type="FloatMapper">
+          <Format>F2</Format>
+          <From i:type="GetAttributeValueOffloat">
+            <From>左右</From>
+            <Reference>filter</Reference>
+          </From>
+          <To>左右</To>
+        </d4p1:anyType>
+      </Mappers>
+    </LogicItem>
+  </LogicItems>
+</ConvertLogicRoot>

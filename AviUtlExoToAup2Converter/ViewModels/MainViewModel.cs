@@ -141,7 +141,7 @@ namespace AviUtlExoToAup2Converter.ViewModels
 
         public void Convert()
         {
-            _model.Convert();
+            _model.Convert(ExoPath);
         }
 
 

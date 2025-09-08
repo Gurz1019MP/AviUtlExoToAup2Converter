@@ -6,7 +6,16 @@ namespace AviUtlExoToAup2Converter.ViewModels
     {
         public static ViewModel CreateViewModel(dynamic model)
         {
-            string targetTypeString = model.GetType().FullName.Replace("Model", "ViewModel") + "ViewModel";
+            Type type = model.GetType();
+            string targetTypeString;
+            if (type.IsGenericType)
+            {
+                targetTypeString = type.GetGenericTypeDefinition().FullName?.Replace("Model", "ViewModel").Replace("`1", string.Empty) + "ViewModel`1[[" + type.GetGenericArguments()[0].FullName + "]]";
+            }
+            else
+            {
+                targetTypeString = type.FullName?.Replace("Model", "ViewModel") + "ViewModel";
+            }
             Type? targetType = Type.GetType(targetTypeString);
             if (targetType == null)
             {

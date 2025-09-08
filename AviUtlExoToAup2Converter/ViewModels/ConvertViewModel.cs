@@ -1,18 +1,8 @@
-﻿using AviUtlExoToAup2Converter.Models;
-using AviUtlExoToAup2Converter.ViewModels.Item.Aup2;
+﻿using AviUtlExoToAup2Converter.ViewModels.Item.Aup2;
 using AviUtlExoToAup2Converter.ViewModels.Item.Exo;
 using Livet;
 using Livet.Commands;
-using Livet.EventListeners;
 using Livet.EventListeners.WeakEvents;
-using Livet.Messaging;
-using Livet.Messaging.IO;
-using Livet.Messaging.Windows;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 namespace AviUtlExoToAup2Converter.ViewModels
 {
@@ -144,9 +134,9 @@ namespace AviUtlExoToAup2Converter.ViewModels
         }
 
 
-        private ViewModelCommand _LoadLogicCommand;
+        private ViewModelCommand? _LoadLogicCommand;
 
-        public ViewModelCommand LoadLogicCommand
+        public ViewModelCommand? LoadLogicCommand
         {
             get
             {

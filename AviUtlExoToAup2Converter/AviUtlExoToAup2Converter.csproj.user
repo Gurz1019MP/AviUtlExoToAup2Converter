@@ -14,6 +14,15 @@
     <Compile Update="Models\Setting.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="ViewModels\ConvertLogic\BlendModeValueViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\ConvertLogicRootViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\LogicItemViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ViewModels\ConvertViewModel.cs">
       <SubType>Code</SubType>
     </Compile>

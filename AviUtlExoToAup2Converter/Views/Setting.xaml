@@ -4,8 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AviUtlExoToAup2Converter.Views"
+             xmlns:vm="clr-namespace:AviUtlExoToAup2Converter.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{x:Type vm:SettingViewModel}">
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,8 +20,11 @@
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
             <Label Content="変換ロジック定義XML"/>
-            <TextBox Grid.Column="1" VerticalContentAlignment="Center"/>
-            <Button Grid.Column="2" Content="読み込み"/>
+            <TextBox Grid.Column="1" Text="{Binding LogicPath, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+            <Button Grid.Column="2" Content="読み込み" Command="{Binding LoadLogicCommand}"/>
         </Grid>
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding Logic.LogicItems}"/>
+        </ScrollViewer>
     </Grid>
 </UserControl>

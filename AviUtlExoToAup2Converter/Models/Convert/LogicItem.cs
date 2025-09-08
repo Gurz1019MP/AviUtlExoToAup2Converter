@@ -14,7 +14,7 @@ namespace AviUtlExoToAup2Converter.Models.Convert
         public string EffectName { get; set; } = string.Empty;
 
         [DataMember]
-        public LogicCondition? Condition { get; set; }
+        public LogicCondition<string>? Condition { get; set; }
 
         [DataMember]
         public IMapper[] Mappers { get; set; } = [];

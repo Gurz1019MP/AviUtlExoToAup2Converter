@@ -7,17 +7,17 @@ namespace AviUtlExoToAup2Converter.Models.Convert
     public class FloatMapper : IMapper
     {
         [DataMember]
-        public string From { get; set; } = string.Empty;
+        public required IValue<float> From { get; set; }
 
         [DataMember]
-        public string To { get; set; } = string.Empty;
+        public required string To { get; set; }
 
         [DataMember]
-        public string Format {  get; set; } = string.Empty;
+        public required string Format {  get; set; }
 
         public IAttribute Map(Dictionary<string, object> proxy)
         {
-            return new FloatAttribute(To, proxy.GetValue<float>(From), Format);
+            return new FloatAttribute(To, From.Invoke(proxy), Format);
         }
     }
 }

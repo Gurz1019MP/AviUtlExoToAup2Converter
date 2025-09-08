@@ -7,14 +7,14 @@ namespace AviUtlExoToAup2Converter.Models.Convert
     public class IntMapper : IMapper
     {
         [DataMember]
-        public string From { get; set; } = string.Empty;
+        public required IValue<int> From { get; set; }
 
         [DataMember]
-        public string To { get; set; } = string.Empty;
+        public required string To { get; set; }
 
         public IAttribute Map(Dictionary<string, object> proxy)
         {
-            return new IntAttribute(To, proxy.GetValue<int>(From));
+            return new IntAttribute(To, From.Invoke(proxy));
         }
     }
 }

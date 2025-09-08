@@ -7,14 +7,19 @@ namespace AviUtlExoToAup2Converter.Models.Convert
     public class StringMapper : IMapper
     {
         [DataMember]
-        public string From { get; set; } = string.Empty;
+        public required IValue<string> From { get; set; }
 
         [DataMember]
-        public string To { get; set; } = string.Empty;
+        public required string To { get; set; }
 
         public IAttribute Map(Dictionary<string, object> proxy)
         {
-            return new StringAttribute(To, proxy.GetStringValue(From));
+            string? value = From.Invoke(proxy);
+            if (value == null)
+            {
+                value = string.Empty;
+            }
+            return new StringAttribute(To, value);
         }
     }
 }

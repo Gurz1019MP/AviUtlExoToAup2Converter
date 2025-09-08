@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AviUtlExoToAup2Converter.Models.Convert
+namespace AviUtlExoToAup2Converter.Models.ConvertLogic
 {
     public interface IMapper
     {

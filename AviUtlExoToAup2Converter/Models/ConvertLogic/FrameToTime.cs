@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace AviUtlExoToAup2Converter.Models.Convert
+namespace AviUtlExoToAup2Converter.Models.ConvertLogic
 {
     [DataContract]
     public class FrameToTime : IValue<float>

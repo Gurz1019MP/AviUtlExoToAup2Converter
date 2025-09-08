@@ -1,11 +1,4 @@
-﻿using AviUtlExoToAup2Converter.Models.Convert;
-using AviUtlExoToAup2Converter.Models.DAO;
-using AviUtlExoToAup2Converter.Models.Item.Aup2;
-using AviUtlExoToAup2Converter.Models.Item.Exo;
-using Livet;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Xml;
+﻿using Livet;
 
 namespace AviUtlExoToAup2Converter.Models
 {
@@ -13,75 +6,33 @@ namespace AviUtlExoToAup2Converter.Models
     {
         #region Property
 
-        private ExoItem? _ExoItem2;
+        private Convert _ConvertModel = new();
 
-        public ExoItem? ExoItem2
+        public Convert ConvertModel
         {
             get
-            { return _ExoItem2; }
+            { return _ConvertModel; }
             set
-            {
-                if (_ExoItem2 == value)
+            { 
+                if (_ConvertModel == value)
                     return;
-                _ExoItem2 = value;
+                _ConvertModel = value;
                 RaisePropertyChanged();
             }
         }
 
-        private Aup2Item? _Aup2Item2;
+        private Setting _SettingModel = new();
 
-        public Aup2Item? Aup2Item2
+        public Setting SettingModel
         {
             get
-            { return _Aup2Item2; }
+            { return _SettingModel; }
             set
-            {
-                if (_Aup2Item2 == value)
+            { 
+                if (_SettingModel == value)
                     return;
-                _Aup2Item2 = value;
+                _SettingModel = value;
                 RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region Method
-
-        public void Import(string path)
-        {
-            //ExoItem = ExoAccessObject.Deserialize(path);
-            ExoItem2 = ExoAccessObject.Deserialize(path);
-        }
-
-        public void Convert(string path)
-        {
-            if (ExoItem2 == null) throw new ArgumentNullException();
-
-            ConvertLogicRoot? logic = null;
-            DataContractSerializer serializer = new DataContractSerializer(typeof(Convert.ConvertLogicRoot));
-            using (var stream = new FileStream(Path.ChangeExtension(path, "xml"), FileMode.Open))
-            {
-                 logic = serializer.ReadObject(stream) as ConvertLogicRoot;
-            }
-
-            if (logic != null)
-            {
-                Aup2Item2 = ExoItem2.Convert(logic);
-            }
-        }
-
-        public void Export(string path)
-        {
-            if (Aup2Item2 == null) throw new ArgumentNullException();
-            Aup2AccessObject.Serialize(Aup2Item2, path);
-
-            DataContractSerializer serializer = new DataContractSerializer(typeof(Convert.ConvertLogicRoot));
-            using (var stream = new FileStream(Path.ChangeExtension(path, "xml"), FileMode.OpenOrCreate ))
-            {
-                using (var writer = XmlWriter.Create(stream, new XmlWriterSettings() { Indent = true }))
-                {
-                    serializer.WriteObject(writer, Models.Convert.ConvertLogicRoot.DevLogic);
-                }
             }
         }
 

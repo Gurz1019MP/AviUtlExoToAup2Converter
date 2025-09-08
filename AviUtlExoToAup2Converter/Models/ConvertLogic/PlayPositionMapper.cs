@@ -1,7 +1,7 @@
 ﻿using AviUtlExoToAup2Converter.Models.Item;
 using System.Runtime.Serialization;
 
-namespace AviUtlExoToAup2Converter.Models.Convert
+namespace AviUtlExoToAup2Converter.Models.ConvertLogic
 {
     [DataContract]
     public class PlayPositionMapper : IMapper

@@ -2,7 +2,7 @@
 using AviUtlExoToAup2Converter.Models.Item.Exo;
 using System.Runtime.Serialization;
 
-namespace AviUtlExoToAup2Converter.Models.Convert
+namespace AviUtlExoToAup2Converter.Models.ConvertLogic
 {
     [DataContract]
     [KnownType(typeof(BlendModeValue))]

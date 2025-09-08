@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AviUtlExoToAup2Converter.Models.Convert
+namespace AviUtlExoToAup2Converter.Models.ConvertLogic
 {
     [DataContract]
     public class BoolConditionEqual : IValue<bool>

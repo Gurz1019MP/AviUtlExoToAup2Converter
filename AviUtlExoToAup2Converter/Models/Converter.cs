@@ -1,5 +1,4 @@
-﻿using AviUtlExoToAup2Converter.Models.Convert;
-using AviUtlExoToAup2Converter.Models.Item;
+﻿using AviUtlExoToAup2Converter.Models.Item;
 using AviUtlExoToAup2Converter.Models.Item.Aup2;
 using AviUtlExoToAup2Converter.Models.Item.Exo;
 
@@ -7,7 +6,7 @@ namespace AviUtlExoToAup2Converter.Models
 {
     public static class Converter
     {
-        public static Aup2Item Convert(this ExoItem baseItem, ConvertLogicRoot logic)
+        public static Aup2Item Convert(this ExoItem baseItem, ConvertLogic.ConvertLogicRoot logic)
         {
             Aup2Item result = new Aup2Item();
 

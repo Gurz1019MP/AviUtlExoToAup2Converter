@@ -1,10 +1,10 @@
 ﻿using System.Numerics;
 using System.Runtime.Serialization;
 
-namespace AviUtlExoToAup2Converter.Models.Convert
+namespace AviUtlExoToAup2Converter.Models.ConvertLogic
 {
     [DataContract]
-    public class CalcSub<T> : IValue<T> where T : INumber<T>
+    public class CalcSum<T> : IValue<T> where T : INumber<T>
     {
         [DataMember]
         public required IValue<T> Operand1 { get; set; }
@@ -18,7 +18,7 @@ namespace AviUtlExoToAup2Converter.Models.Convert
             T? value2 = Operand2.Invoke(proxy);
             if (value1 != null && value2 != null)
             {
-                return value1 - value2;
+                return value1 + value2;
             }
             else
             {

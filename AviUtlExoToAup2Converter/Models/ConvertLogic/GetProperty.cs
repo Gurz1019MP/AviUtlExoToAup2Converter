@@ -1,29 +1,28 @@
-﻿using AviUtlExoToAup2Converter.Models.Item;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace AviUtlExoToAup2Converter.Models.Convert
+namespace AviUtlExoToAup2Converter.Models.ConvertLogic
 {
     [DataContract]
-    public class GetAttributeValue<T> : IValue<T>
+    public class GetProperty<T> : IValue<T>
     {
         [DataMember]
-        public string Reference {  get; set; } = string.Empty;
+        public string Reference { get; set; } = string.Empty;
 
         [DataMember]
-        public string From { get; set; } = string.Empty;
+        public string Property { get; set; } = string.Empty;
 
         public T? Invoke(Dictionary<string, object> proxy)
         {
             object target = proxy[Reference];
             Type type = target.GetType();
-            PropertyInfo? propertyInfo = type.GetProperty("Attributes");
+            PropertyInfo? propertyInfo = type.GetProperty(Property);
             if (propertyInfo == null) return default;
 
             object? objValue = propertyInfo.GetValue(target);
             if (objValue == null) return default;
 
-            return ((IAttribute[])objValue).GetValue<T>(From);
+            return (T)objValue;
         }
     }
 }

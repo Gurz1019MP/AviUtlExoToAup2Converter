@@ -4,30 +4,31 @@
                     xmlns:vmc="clr-namespace:AviUtlExoToAup2Converter.ViewModels.ConvertLogic">
     <v:ConvertLogicTemplateSelector x:Key="convertLogicTemplateSelector"/>
     <DataTemplate DataType="{x:Type vmc:LogicItemViewModel}">
-        <Grid Background="#EEEEEE">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <ContentPresenter Content="{Binding Condition}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"/>
+        <Border Background="#EEEEEE"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5">
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="エフェクト名："/>
-                <TextBlock Grid.Column="1" Text="{Binding EffectName}"/>
-                <TextBlock Grid.Row="1" Text="変数："/>
-                <ItemsControl Grid.Row="1" Grid.Column="1" ItemsSource="{Binding LocalVars}"/>
-                <TextBlock Grid.Row="2" Text="マッピング：" VerticalAlignment="Center"/>
-                <ItemsControl Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Mappers}" ItemTemplateSelector="{StaticResource convertLogicTemplateSelector}"/>
+                <TextBlock Text="条件："/>
+                <ContentPresenter Grid.Column="1" Content="{Binding Condition}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"/>
+                <TextBlock Grid.Row="1" Text="エフェクト名：" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding EffectName}" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Row="2" Text="変数：" VerticalAlignment="Center"/>
+                <ItemsControl Grid.Row="2" Grid.Column="1" ItemsSource="{Binding LocalVars}"/>
+                <TextBlock Grid.Row="3" Text="マッピング：" VerticalAlignment="Center"/>
+                <ItemsControl Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Mappers}" ItemTemplateSelector="{StaticResource convertLogicTemplateSelector}"/>
             </Grid>
-        </Grid>
+        </Border>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vmc:VariableViewModel}">
         <Grid>
@@ -35,7 +36,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock>
+            <TextBlock VerticalAlignment="Center">
                 <Run Text="{Binding Key}"/>
                 <Run Text="："/>
             </TextBlock>
@@ -43,118 +44,226 @@
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="IntValueViewModel" DataType="{x:Type vmc:IntValueViewModel}">
-        <Grid Background="Cyan">
-            <TextBlock Text="{Binding Value}"/>
-        </Grid>
+        <Border Background="Cyan"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
+                <TextBlock Text="数値："/>
+                <TextBlock Text="{Binding Value}" FontWeight="Bold" Margin="5,0"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="FloatValueViewModel" DataType="{x:Type vmc:FloatValueViewModel}">
-        <Grid Background="Yellow">
-            <TextBlock Text="{Binding Value}"/>
-        </Grid>
+        <Border Background="Yellow"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
+                <TextBlock Text="数値："/>
+                <TextBlock Text="{Binding Value}" FontWeight="Bold" Margin="5,0"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="StringValueViewModel" DataType="{x:Type vmc:StringValueViewModel}">
-        <Grid Background="LightGreen">
-            <TextBlock Text="{Binding Value}"/>
-        </Grid>
+        <Border Background="LightGreen"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
+                <TextBlock Text="文字列："/>
+                <TextBlock Text="{Binding Value}" FontWeight="Bold" Margin="5,0"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="GetAttributeValueViewModel`1" DataType="{x:Type vmc:GetAttributeValueViewModel`1}">
-        <Grid Background="CornflowerBlue">
-            <TextBlock>
-                <Run Text="{Binding From}"/>
-                <Run Text="("/>
-                <Run Text="{Binding Reference}"/>
-                <Run Text=")"/>
-            </TextBlock>
-        </Grid>
+        <Border Background="CornflowerBlue"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="変数" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Reference}" FontWeight="Bold" Margin="5,0"/>
+                <TextBlock Text="から設定値" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding From}" FontWeight="Bold" Margin="5,0"/>
+                <TextBlock Text="の値を取得" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="GetPropertyViewModel`1" DataType="{x:Type vmc:GetPropertyViewModel`1}">
-        <Grid Background="CadetBlue">
-            <TextBlock>
-                <Run Text="{Binding Property}"/>
-                <Run Text="("/>
-                <Run Text="{Binding Reference}"/>
-                <Run Text=")"/>
-            </TextBlock>
-        </Grid>
+        <Border Background="CadetBlue"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="変数" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Reference}" FontWeight="Bold" Margin="5,0"/>
+                <TextBlock Text="の" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Property}" FontWeight="Bold" Margin="5,0"/>
+                <TextBlock Text="を取得" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="ConditionEqualViewModel`1" DataType="{x:Type vmc:ConditionEqualViewModel`1}">
-        <StackPanel Background="PaleVioletRed" Orientation="Horizontal" VerticalAlignment="Center">
-            <ContentPresenter Content="{Binding Operand1}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-            <TextBlock Text="と"/>
-            <ContentPresenter Content="{Binding Operand2}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-            <TextBlock Text="が等しい"/>
-        </StackPanel>
+        <Border Background="PaleVioletRed"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal">
+                <ContentPresenter Content="{Binding Operand1}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
+                <TextBlock Text="と" VerticalAlignment="Center"/>
+                <ContentPresenter Content="{Binding Operand2}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
+                <TextBlock Text="が等しいとき" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="BoolConditionEqualViewModel" DataType="{x:Type vmc:BoolConditionEqualViewModel}">
-        <StackPanel Background="Pink" HorizontalAlignment="Center">
-            <ContentPresenter Content="{Binding Operand1}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-            <TextBlock Text="かつ"/>
-            <ContentPresenter Content="{Binding Operand2}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-            <TextBlock Text="のとき"/>
-        </StackPanel>
+        <Border Background="Pink"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <StackPanel Background="Pink">
+                <ContentPresenter Content="{Binding Operand1}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" HorizontalAlignment="Center"/>
+                <TextBlock Text="かつ" HorizontalAlignment="Center"/>
+                <ContentPresenter Content="{Binding Operand2}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" HorizontalAlignment="Center"/>
+                <TextBlock Text="のとき" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="IntMapperViewModel" DataType="{x:Type vmc:IntMapperViewModel}">
-        <StackPanel Background="DarkCyan" Orientation="Horizontal" VerticalAlignment="Center">
-            <TextBlock Text="{Binding To}"/>
-            <TextBlock Text="←"/>
-            <ContentPresenter Content="{Binding From}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-        </StackPanel>
+        <Border Background="DarkCyan"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding To}" FontWeight="Bold" VerticalAlignment="Center" Margin="5,0"/>
+                <TextBlock Text="へ次の値を設定" VerticalAlignment="Center"/>
+                <ContentPresenter Content="{Binding From}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="FloatMapperViewModel" DataType="{x:Type vmc:FloatMapperViewModel}">
-        <StackPanel Background="Orange" Orientation="Horizontal" VerticalAlignment="Center">
-            <TextBlock Text="{Binding To}"/>
-            <TextBlock Text="←"/>
-            <ContentPresenter Content="{Binding From}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-        </StackPanel>
+        <Border Background="Orange"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding To}" FontWeight="Bold" VerticalAlignment="Center" Margin="5,0"/>
+                <TextBlock Text="へ次の値を設定" VerticalAlignment="Center"/>
+                <ContentPresenter Content="{Binding From}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="StringMapperViewModel" DataType="{x:Type vmc:StringMapperViewModel}">
-        <StackPanel Background="Green" Orientation="Horizontal" VerticalAlignment="Center">
-            <TextBlock Text="{Binding To}"/>
-            <TextBlock Text="←"/>
-            <ContentPresenter Content="{Binding From}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-        </StackPanel>
+        <Border Background="Green"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding To}" FontWeight="Bold" VerticalAlignment="Center" Margin="5,0"/>
+                <TextBlock Text="へ次の値を設定" VerticalAlignment="Center"/>
+                <ContentPresenter Content="{Binding From}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="PlayPositionMapperViewModel" DataType="{x:Type vmc:PlayPositionMapperViewModel}">
-        <StackPanel Background="Brown" Orientation="Horizontal" VerticalAlignment="Center">
-            <TextBlock Text="{Binding To}"/>
-            <TextBlock Text="←"/>
-            <ContentPresenter Content="{Binding Start}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-            <TextBlock Text="～"/>
-            <ContentPresenter Content="{Binding End}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-            <TextBlock Text="再生範囲"/>
-            <ContentPresenter Content="{Binding Range}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-        </StackPanel>
+        <Border Background="Brown"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding To}" FontWeight="Bold" Foreground="LightGray" VerticalAlignment="Center" Margin="5,0"/>
+                <TextBlock Text="へ次の値を設定" Foreground="LightGray" VerticalAlignment="Center"/>
+                <ContentPresenter Content="{Binding Start}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" VerticalAlignment="Center"/>
+                <TextBlock Text="～" Foreground="LightGray" VerticalAlignment="Center"/>
+                <ContentPresenter Content="{Binding End}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" VerticalAlignment="Center"/>
+                <TextBlock Text="再生範囲" Foreground="LightGray" VerticalAlignment="Center"/>
+                <ContentPresenter Content="{Binding Range}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="CalcSubViewModel`1" DataType="{x:Type vmc:CalcSubViewModel`1}">
-        <StackPanel Background="DarkOliveGreen" Orientation="Horizontal"> 
-            <ContentPresenter Content="{Binding Operand1}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-            <TextBlock Text="－"/>
-            <ContentPresenter Content="{Binding Operand2}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-        </StackPanel>
+        <Border Background="DarkOliveGreen"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal"> 
+                <ContentPresenter Content="{Binding Operand1}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" VerticalAlignment="Center"/>
+                <TextBlock Text="－" Foreground="LightGray" VerticalAlignment="Center"/>
+                <ContentPresenter Content="{Binding Operand2}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="CalcSumViewModel`1" DataType="{x:Type vmc:CalcSumViewModel`1}">
-        <StackPanel Background="DarkGreen" Orientation="Horizontal">
-            <ContentPresenter Content="{Binding Operand1}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-            <TextBlock Text="＋"/>
-            <ContentPresenter Content="{Binding Operand2}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-        </StackPanel>
+        <Border Background="DarkGreen"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal">
+                <ContentPresenter Content="{Binding Operand1}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" VerticalAlignment="Center"/>
+                <TextBlock Text="＋" Foreground="LightGray" VerticalAlignment="Center"/>
+                <ContentPresenter Content="{Binding Operand2}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="FrameToTimeViewModel" DataType="{x:Type vmc:FrameToTimeViewModel}">
-        <StackPanel Background="Chocolate" HorizontalAlignment="Center">
-            <TextBlock Text="フレームから時間へ"/>
-            <ContentPresenter Content="{Binding Frame}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-        </StackPanel>
+        <Border Background="Chocolate"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="フレームから時間へ" Foreground="LightGray" HorizontalAlignment="Center"/>
+                <ContentPresenter Content="{Binding Frame}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="BlendModeValueViewModel" DataType="{x:Type vmc:BlendModeValueViewModel}">
-        <StackPanel Background="Indigo" HorizontalAlignment="Center">
-            <TextBlock Text="合成モードへ変換"/>
-            <ContentPresenter Content="{Binding Value}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-        </StackPanel>
+        <Border Background="Indigo"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="合成モードへ変換" Foreground="LightGray" HorizontalAlignment="Center"/>
+                <ContentPresenter Content="{Binding Value}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
     <DataTemplate x:Key="FindFirstFilterByNameViewModel" DataType="{x:Type vmc:FindFirstFilterByNameViewModel}">
-        <StackPanel Background="Gold" HorizontalAlignment="Center">
-            <TextBlock Text="フィルタを名前で検索"/>
-            <ContentPresenter Content="{Binding Name}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
-        </StackPanel>
+        <Border Background="Gold"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="フィルタを名前で検索" HorizontalAlignment="Center"/>
+                <ContentPresenter Content="{Binding Name}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </DataTemplate>
 </ResourceDictionary>

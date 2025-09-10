@@ -23,7 +23,8 @@
             <TextBox Grid.Column="1" Text="{Binding LogicPath, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
             <Button Grid.Column="2" Content="読み込み" Command="{Binding LoadLogicCommand}"/>
         </Grid>
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer Grid.Row="1"
+                      HorizontalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding Logic.LogicItems}"/>
         </ScrollViewer>
     </Grid>

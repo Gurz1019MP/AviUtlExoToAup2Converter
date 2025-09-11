@@ -1,10 +1,6 @@
-﻿using Livet;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
+﻿using AviUtlExoToAup2Converter.Models.ConvertLogic;
+using AviUtlExoToAup2Converter.Models.DAO;
+using Livet;
 
 namespace AviUtlExoToAup2Converter.Models
 {
@@ -12,9 +8,9 @@ namespace AviUtlExoToAup2Converter.Models
     {
         #region Property
 
-        private ConvertLogic.ConvertLogicRoot? _Logic;
+        private ConvertLogicRoot? _Logic;
 
-        public ConvertLogic.ConvertLogicRoot? Logic
+        public ConvertLogicRoot? Logic
         {
             get
             { return _Logic; }
@@ -33,9 +29,33 @@ namespace AviUtlExoToAup2Converter.Models
 
         public void LoadLogic(string path)
         {
-            DataContractSerializer serializer = new(typeof(ConvertLogic.ConvertLogicRoot));
-            using var stream = new FileStream(path, FileMode.Open);
-            Logic = serializer.ReadObject(stream) as ConvertLogic.ConvertLogicRoot;
+            Logic = XmlAccessObject.Deserialize(path);
+        }
+
+        public void SaveLogic(string path)
+        {
+            if (Logic == null) return;
+            if (string.IsNullOrEmpty(path)) return;
+
+            XmlAccessObject.Serialize(Logic, path);
+        }
+
+        public void CreateNewLogic()
+        {
+            Logic = new ConvertLogicRoot()
+            {
+                LogicItems = [new LogicItem()]
+            };
+        }
+
+        public void DropRemove(object obj)
+        {
+            if (Logic == null) return;
+
+            foreach(LogicItem item in Logic.LogicItems)
+            {
+                item.RemoveObject(obj);
+            }
         }
 
         #endregion

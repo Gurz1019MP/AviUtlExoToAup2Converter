@@ -5,6 +5,9 @@
     <Compile Update="Models\Convert.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Models\ConvertLogic\ConvertLogicBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Models\Item\Exo\GeneralFilter.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -36,6 +39,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Convert.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\LogicItem.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Setting.xaml.cs">

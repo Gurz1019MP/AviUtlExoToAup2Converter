@@ -1,16 +1,39 @@
-﻿using System.Runtime.Serialization;
+﻿using AviUtlExoToAup2Converter.Models.DAO;
+using Livet;
+using System.Runtime.Serialization;
 
 namespace AviUtlExoToAup2Converter.Models.ConvertLogic
 {
     [DataContract]
-    public class StringValue : IValue<string>
+    public class StringValue : ConvertLogicBase, IValue<string>, ICloneable
     {
+        private string? _Value;
+
         [DataMember]
-        public required string Value { get; set; }
+        public string? Value
+        {
+            get
+            { return _Value; }
+            set
+            { 
+                if (_Value == value)
+                    return;
+                _Value = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public string Invoke(Dictionary<string, object> proxy)
         {
-            return Value;
+            return Value == null ? string.Empty : Value;
+        }
+
+        public object Clone()
+        {
+            return new StringValue()
+            {
+                Value = Value
+            };
         }
     }
 }

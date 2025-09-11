@@ -1,20 +1,27 @@
 ﻿using AviUtlExoToAup2Converter.Models.ConvertLogic;
-using Livet;
+using Livet.Commands;
+using Livet.EventListeners.WeakEvents;
 
 namespace AviUtlExoToAup2Converter.ViewModels.ConvertLogic
 {
-    public class FloatMapperViewModel : ViewModel, IMapperViewModel
+    public class FloatMapperViewModel : ConvertLogicViewModelBase
     {
         public FloatMapperViewModel(FloatMapper model)
         {
-            _model = model;
-            _From = (IValueViewModel<float>)ViewModelFactory.CreateViewModel(_model.From);
+            Model = model;
+            From = ViewModelFactory.CreateViewModel(Model.From) as ConvertLogicViewModelBase;
+
+            CompositeDisposable.Add(new PropertyChangedWeakEventListener(Model)
+            {
+                { nameof(Model.From), (s, e) => From = ViewModelFactory.CreateViewModel(Model.From) as ConvertLogicViewModelBase }
+            });
         }
 
+        public FloatMapper Model { get; }
 
-        private IValueViewModel<float> _From;
+        private ConvertLogicViewModelBase? _From;
 
-        public IValueViewModel<float> From
+        public ConvertLogicViewModelBase? From
         {
             get
             { return _From; }
@@ -24,21 +31,26 @@ namespace AviUtlExoToAup2Converter.ViewModels.ConvertLogic
                     return;
                 _From = value;
                 RaisePropertyChanged();
+                RaisePropertyChanged(nameof(HasFrom));
+                RaisePropertyChanged(nameof(NoFrom));
             }
         }
 
-        public string To
-        {
-            get { return _model.To; }
-            set { _model.To = value; }
-        }
+        public bool HasFrom => From != null;
+        public bool NoFrom => From == null;
 
-        public string Format
-        {
-            get { return _model.Format; }
-            set { _model.Format = value; }
-        }
+        private ListenerCommand<object>? _DropFromCommand;
 
-        private readonly FloatMapper _model;
+        public ListenerCommand<object> DropFromCommand
+        {
+            get
+            {
+                if (_DropFromCommand == null)
+                {
+                    _DropFromCommand = new ListenerCommand<object>(Model.DropFrom);
+                }
+                return _DropFromCommand;
+            }
+        }
     }
 }

@@ -1,19 +1,27 @@
 ﻿using AviUtlExoToAup2Converter.Models.ConvertLogic;
-using Livet;
+using Livet.Commands;
+using Livet.EventListeners.WeakEvents;
 
 namespace AviUtlExoToAup2Converter.ViewModels.ConvertLogic
 {
-    public class ConvertLogicRootViewModel : ViewModel
+    public class ConvertLogicRootViewModel : ConvertLogicViewModelBase
     {
         public ConvertLogicRootViewModel(ConvertLogicRoot model)
         {
-            _model = model;
-            LogicItems = [.. _model.LogicItems.CreateViewModels().Cast<LogicItemViewModel>()];
+            Model = model;
+            LogicItems = [.. Model.LogicItems.CreateViewModels().Cast<LogicItemViewModel>()];
+
+            CompositeDisposable.Add(new PropertyChangedWeakEventListener(Model)
+            {
+                { nameof(Model.LogicItems), (s,e) => LogicItems = [.. Model.LogicItems.CreateViewModels().Cast<LogicItemViewModel>()] }
+            });
         }
 
-        private LogicItemViewModel[] _LogicItems = [];
+        public ConvertLogicRoot Model { get; }
 
-        public LogicItemViewModel[] LogicItems
+        private LogicItemViewModel[]? _LogicItems;
+
+        public LogicItemViewModel[]? LogicItems
         {
             get
             { return _LogicItems; }
@@ -26,6 +34,18 @@ namespace AviUtlExoToAup2Converter.ViewModels.ConvertLogic
             }
         }
 
-        private readonly ConvertLogicRoot _model;
+        private ViewModelCommand? _AddLogicItemCommand;
+
+        public ViewModelCommand? AddLogicItemCommand
+        {
+            get
+            {
+                if (_AddLogicItemCommand == null)
+                {
+                    _AddLogicItemCommand = new ViewModelCommand(Model.AddLogicItem);
+                }
+                return _AddLogicItemCommand;
+            }
+        }
     }
 }

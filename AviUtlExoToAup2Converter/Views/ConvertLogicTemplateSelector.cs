@@ -14,7 +14,7 @@ namespace AviUtlExoToAup2Converter.Views
         {
             try
             {
-                return (DataTemplate)Application.Current.FindResource(item.GetType().Name);
+                return (DataTemplate)Application.Current.FindResource(item?.GetType().Name);
             }
             catch(Exception e)
             {

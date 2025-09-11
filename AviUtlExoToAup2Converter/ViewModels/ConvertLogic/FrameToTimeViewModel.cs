@@ -1,20 +1,27 @@
 ﻿using AviUtlExoToAup2Converter.Models.ConvertLogic;
-using Livet;
+using Livet.Commands;
+using Livet.EventListeners.WeakEvents;
 
 namespace AviUtlExoToAup2Converter.ViewModels.ConvertLogic
 {
-    public class FrameToTimeViewModel : ViewModel, IValueViewModel<float>
+    public class FrameToTimeViewModel : ConvertLogicViewModelBase
     {
         public FrameToTimeViewModel(FrameToTime model)
         {
-            _model = model;
-            _Frame = (IValueViewModel<int>)ViewModelFactory.CreateViewModel(_model.Frame);
+            Model = model;
+            Frame = ViewModelFactory.CreateViewModel(Model.Frame) as ConvertLogicViewModelBase;
+
+            CompositeDisposable.Add(new PropertyChangedWeakEventListener(Model)
+            {
+                { nameof(Model.Frame), (s, e) => Frame = ViewModelFactory.CreateViewModel(Model.Frame) as ConvertLogicViewModelBase }
+            });
         }
 
+        public FrameToTime Model { get; }
 
-        private IValueViewModel<int> _Frame;
+        private ConvertLogicViewModelBase? _Frame;
 
-        public IValueViewModel<int> Frame
+        public ConvertLogicViewModelBase? Frame
         {
             get
             { return _Frame; }
@@ -24,10 +31,27 @@ namespace AviUtlExoToAup2Converter.ViewModels.ConvertLogic
                     return;
                 _Frame = value;
                 RaisePropertyChanged();
+                RaisePropertyChanged(nameof(HasFrame));
+                RaisePropertyChanged(nameof(NoFrame));
             }
         }
 
+        public bool HasFrame => _Frame != null;
+        public bool NoFrame => _Frame == null;
 
-        private readonly FrameToTime _model;
+
+        private ListenerCommand<object>? _DropFrameCommand;
+
+        public ListenerCommand<object> DropFrameCommand
+        {
+            get
+            {
+                if (_DropFrameCommand == null)
+                {
+                    _DropFrameCommand = new ListenerCommand<object>(Model.DropFrame);
+                }
+                return _DropFrameCommand;
+            }
+        }
     }
 }

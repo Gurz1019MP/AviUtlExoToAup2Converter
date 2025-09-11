@@ -3,9 +3,6 @@ using AviUtlExoToAup2Converter.Models.Item;
 using AviUtlExoToAup2Converter.Models.Item.Aup2;
 using AviUtlExoToAup2Converter.Models.Item.Exo;
 using Livet;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Xml;
 
 namespace AviUtlExoToAup2Converter.Models
 {
@@ -69,9 +66,7 @@ namespace AviUtlExoToAup2Converter.Models
 
         public void LoadLogic(string path)
         {
-            DataContractSerializer serializer = new(typeof(ConvertLogic.ConvertLogicRoot));
-            using var stream = new FileStream(path, FileMode.Open);
-            Logic = serializer.ReadObject(stream) as ConvertLogic.ConvertLogicRoot;
+            Logic = XmlAccessObject.Deserialize(path);
         }
 
         public void Invoke()
@@ -127,14 +122,7 @@ namespace AviUtlExoToAup2Converter.Models
             if (Aup2Item == null) throw new ArgumentNullException();
             Aup2AccessObject.Serialize(Aup2Item, path);
 
-            //DataContractSerializer serializer = new DataContractSerializer(typeof(ConvertLogic.ConvertLogicRoot));
-            //using (var stream = new FileStream(Path.ChangeExtension(path, "xml"), FileMode.OpenOrCreate))
-            //{
-            //    using (var writer = XmlWriter.Create(stream, new XmlWriterSettings() { Indent = true }))
-            //    {
-            //        serializer.WriteObject(writer, Models.ConvertLogic.ConvertLogicRoot.DevLogic);
-            //    }
-            //}
+            //XmlAccessObject.Serialize(ConvertLogic.ConvertLogicRoot.DevLogic, Path.ChangeExtension(path, "xml"));
         }
 
         #endregion

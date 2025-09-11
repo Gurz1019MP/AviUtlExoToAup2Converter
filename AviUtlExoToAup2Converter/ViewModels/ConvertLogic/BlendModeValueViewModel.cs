@@ -1,19 +1,27 @@
 ﻿using AviUtlExoToAup2Converter.Models.ConvertLogic;
-using Livet;
+using Livet.Commands;
+using Livet.EventListeners.WeakEvents;
 
 namespace AviUtlExoToAup2Converter.ViewModels.ConvertLogic
 {
-    public class BlendModeValueViewModel : ViewModel, IValueViewModel<string>
+    public class BlendModeValueViewModel : ConvertLogicViewModelBase
     {
         public BlendModeValueViewModel(BlendModeValue model)
         {
-            _model = model;
-            _Value = (IValueViewModel<int>)ViewModelFactory.CreateViewModel(_model.Value);
+            Model = model;
+            Value = ViewModelFactory.CreateViewModel(Model.Value) as ConvertLogicViewModelBase;
+
+            CompositeDisposable.Add(new PropertyChangedWeakEventListener(Model)
+            {
+                { nameof(Model.Value), (s, e) => Value = ViewModelFactory.CreateViewModel(Model.Value) as ConvertLogicViewModelBase }
+            });
         }
 
-        private IValueViewModel<int> _Value;
+        public BlendModeValue Model { get; }
 
-        public IValueViewModel<int> Value
+        private ConvertLogicViewModelBase? _Value;
+
+        public ConvertLogicViewModelBase? Value
         {
             get
             { return _Value; }
@@ -23,9 +31,27 @@ namespace AviUtlExoToAup2Converter.ViewModels.ConvertLogic
                     return;
                 _Value = value;
                 RaisePropertyChanged();
+                RaisePropertyChanged(nameof(HasValue));
+                RaisePropertyChanged(nameof(NoValue));
             }
         }
 
-        private readonly BlendModeValue _model;
+        public bool HasValue => Value != null;
+        public bool NoValue => Value == null;
+
+
+        private ListenerCommand<object>? _DropValueCommand;
+
+        public ListenerCommand<object> DropValueCommand
+        {
+            get
+            {
+                if (_DropValueCommand == null)
+                {
+                    _DropValueCommand = new ListenerCommand<object>(Model.DropValue);
+                }
+                return _DropValueCommand;
+            }
+        }
     }
 }

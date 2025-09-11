@@ -4,8 +4,10 @@ namespace AviUtlExoToAup2Converter.ViewModels
 {
     static class ViewModelFactory
     {
-        public static ViewModel CreateViewModel(dynamic model)
+        public static ViewModel? CreateViewModel(dynamic? model)
         {
+            if (model == null) return null;
+
             Type type = model.GetType();
             string targetTypeString;
             if (type.IsGenericType)
@@ -40,16 +42,17 @@ namespace AviUtlExoToAup2Converter.ViewModels
             List<ViewModel> viewModels = [];
             foreach (T model in models)
             {
-                if (model != null)
+                try
                 {
-                    try
+                    ViewModel? vm = CreateViewModel(model);
+                    if (vm != null)
                     {
-                        viewModels.Add(CreateViewModel(model));
+                        viewModels.Add(vm);
                     }
-                    catch (InvalidOperationException e)
-                    {
+                }
+                catch (InvalidOperationException e)
+                {
 
-                    }
                 }
             }
             return viewModels;

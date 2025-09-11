@@ -1,21 +1,29 @@
 ﻿using AviUtlExoToAup2Converter.Models.ConvertLogic;
-using Livet;
+using Livet.Commands;
+using Livet.EventListeners.WeakEvents;
 
 namespace AviUtlExoToAup2Converter.ViewModels.ConvertLogic
 {
-    public class BoolConditionEqualViewModel : ViewModel, IValueViewModel<bool>
+    public class BoolConditionEqualViewModel : ConvertLogicViewModelBase
     {
         public BoolConditionEqualViewModel(BoolConditionEqual model)
         {
-            _model = model;
-            _Operand1 = (IValueViewModel<bool>)ViewModelFactory.CreateViewModel(_model.Operand1);
-            _Operand2 = (IValueViewModel<bool>)ViewModelFactory.CreateViewModel(_model.Operand2);
+            Model = model;
+            Operand1 = ViewModelFactory.CreateViewModel(Model.Operand1) as ConvertLogicViewModelBase;
+            Operand2 = ViewModelFactory.CreateViewModel(Model.Operand2) as ConvertLogicViewModelBase;
+
+            CompositeDisposable.Add(new PropertyChangedWeakEventListener(Model)
+            {
+                { nameof(Model.Operand1), (s, e) => Operand1 = ViewModelFactory.CreateViewModel(Model.Operand1) as ConvertLogicViewModelBase },
+                { nameof(Model.Operand2), (s, e) => Operand2 = ViewModelFactory.CreateViewModel(Model.Operand2) as ConvertLogicViewModelBase },
+            });
         }
 
+        public BoolConditionEqual Model { get; }
 
-        private IValueViewModel<bool> _Operand1;
+        private ConvertLogicViewModelBase? _Operand1;
 
-        public IValueViewModel<bool> Operand1
+        public ConvertLogicViewModelBase? Operand1
         {
             get
             { return _Operand1; }
@@ -25,12 +33,14 @@ namespace AviUtlExoToAup2Converter.ViewModels.ConvertLogic
                     return;
                 _Operand1 = value;
                 RaisePropertyChanged();
+                RaisePropertyChanged(nameof(HasCondition1));
+                RaisePropertyChanged(nameof(NoCondition1));
             }
         }
 
-        private IValueViewModel<bool> _Operand2;
+        private ConvertLogicViewModelBase? _Operand2;
 
-        public IValueViewModel<bool> Operand2
+        public ConvertLogicViewModelBase? Operand2
         {
             get
             { return _Operand2; }
@@ -40,9 +50,43 @@ namespace AviUtlExoToAup2Converter.ViewModels.ConvertLogic
                     return;
                 _Operand2 = value;
                 RaisePropertyChanged();
+                RaisePropertyChanged(nameof(HasCondition2));
+                RaisePropertyChanged(nameof(NoCondition2));
             }
         }
 
-        private readonly BoolConditionEqual _model;
+        public bool HasCondition1 => Operand1 != null;
+        public bool NoCondition1 => Operand1 == null;
+        public bool HasCondition2 => Operand2 != null;
+        public bool NoCondition2 => Operand2 == null;
+
+
+        private ListenerCommand<object>? _DropOperand1Command;
+
+        public ListenerCommand<object> DropOperand1Command
+        {
+            get
+            {
+                if (_DropOperand1Command == null)
+                {
+                    _DropOperand1Command = new ListenerCommand<object>(Model.DropOperand1);
+                }
+                return _DropOperand1Command;
+            }
+        }
+
+        private ListenerCommand<object>? _DropOperand2Command;
+
+        public ListenerCommand<object> DropOperand2Command
+        {
+            get
+            {
+                if (_DropOperand2Command == null)
+                {
+                    _DropOperand2Command = new ListenerCommand<object>(Model.DropOperand2);
+                }
+                return _DropOperand2Command;
+            }
+        }
     }
 }

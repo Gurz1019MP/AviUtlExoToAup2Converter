@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +16,11 @@ using System.Windows.Shapes;
 namespace AviUtlExoToAup2Converter.Views
 {
     /// <summary>
-    /// Setting.xaml の相互作用ロジック
+    /// LogicItem.xaml の相互作用ロジック
     /// </summary>
-    public partial class Setting : UserControl
+    public partial class LogicItem : UserControl
     {
-        public Setting()
+        public LogicItem()
         {
             InitializeComponent();
         }

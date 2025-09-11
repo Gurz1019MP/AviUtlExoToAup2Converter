@@ -1,21 +1,29 @@
 ﻿using AviUtlExoToAup2Converter.Models.ConvertLogic;
-using Livet;
-using System.Numerics;
+using Livet.Commands;
+using Livet.EventListeners.WeakEvents;
 
 namespace AviUtlExoToAup2Converter.ViewModels.ConvertLogic
 {
-    public class CalcSumViewModel<T> : ViewModel, IValueViewModel<T> where T : INumber<T>
+    public class CalcSumViewModel<T> : ConvertLogicViewModelBase
     {
         public CalcSumViewModel(CalcSum<T> model)
         {
-            _model = model;
-            _Operand1 = (IValueViewModel<T>)ViewModelFactory.CreateViewModel(_model.Operand1);
-            _Operand2 = (IValueViewModel<T>)ViewModelFactory.CreateViewModel(_model.Operand2);
+            Model = model;
+            Operand1 = ViewModelFactory.CreateViewModel(Model.Operand1) as ConvertLogicViewModelBase;
+            Operand2 = ViewModelFactory.CreateViewModel(Model.Operand2) as ConvertLogicViewModelBase;
+
+            CompositeDisposable.Add(new PropertyChangedWeakEventListener(Model)
+            {
+                { nameof(Model.Operand1), (s, e) => Operand1 = ViewModelFactory.CreateViewModel(Model.Operand1) as ConvertLogicViewModelBase },
+                { nameof(Model.Operand2), (s, e) => Operand2 = ViewModelFactory.CreateViewModel(Model.Operand2) as ConvertLogicViewModelBase },
+            });
         }
 
-        private IValueViewModel<T> _Operand1;
+        public CalcSum<T> Model { get; }
 
-        public IValueViewModel<T> Operand1
+        private ConvertLogicViewModelBase? _Operand1;
+
+        public ConvertLogicViewModelBase? Operand1
         {
             get
             { return _Operand1; }
@@ -25,12 +33,14 @@ namespace AviUtlExoToAup2Converter.ViewModels.ConvertLogic
                     return;
                 _Operand1 = value;
                 RaisePropertyChanged();
+                RaisePropertyChanged(nameof(HasOperand1));
+                RaisePropertyChanged(nameof(NoOperand1));
             }
         }
 
-        private IValueViewModel<T> _Operand2;
+        private ConvertLogicViewModelBase? _Operand2;
 
-        public IValueViewModel<T> Operand2
+        public ConvertLogicViewModelBase? Operand2
         {
             get
             { return _Operand2; }
@@ -40,9 +50,43 @@ namespace AviUtlExoToAup2Converter.ViewModels.ConvertLogic
                     return;
                 _Operand2 = value;
                 RaisePropertyChanged();
+                RaisePropertyChanged(nameof(HasOperand2));
+                RaisePropertyChanged(nameof(NoOperand2));
             }
         }
 
-        private readonly CalcSum<T> _model;
+        public bool HasOperand1 => Operand1 != null;
+        public bool NoOperand1 => Operand1 == null;
+        public bool HasOperand2 => Operand2 != null;
+        public bool NoOperand2 => Operand2 == null;
+
+
+        private ListenerCommand<object>? _DropOperand1Command;
+
+        public ListenerCommand<object> DropOperand1Command
+        {
+            get
+            {
+                if (_DropOperand1Command == null)
+                {
+                    _DropOperand1Command = new ListenerCommand<object>(Model.DropOperand1);
+                }
+                return _DropOperand1Command;
+            }
+        }
+
+        private ListenerCommand<object>? _DropOperand2Command;
+
+        public ListenerCommand<object> DropOperand2Command
+        {
+            get
+            {
+                if (_DropOperand2Command == null)
+                {
+                    _DropOperand2Command = new ListenerCommand<object>(Model.DropOperand2);
+                }
+                return _DropOperand2Command;
+            }
+        }
     }
 }

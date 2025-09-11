@@ -1,19 +1,50 @@
-﻿using System.Reflection;
+﻿using AviUtlExoToAup2Converter.Models.DAO;
+using Livet;
+using System.Reflection;
 using System.Runtime.Serialization;
 
 namespace AviUtlExoToAup2Converter.Models.ConvertLogic
 {
     [DataContract]
-    public class GetProperty<T> : IValue<T>
+    public class GetProperty<T> : ConvertLogicBase, IValue<T>, ICloneable
     {
-        [DataMember]
-        public string Reference { get; set; } = string.Empty;
+        private string? _Reference;
 
         [DataMember]
-        public string Property { get; set; } = string.Empty;
+        public string? Reference
+        {
+            get
+            { return _Reference; }
+            set
+            { 
+                if (_Reference == value)
+                    return;
+                _Reference = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string? _Property;
+
+        [DataMember]
+        public string? Property
+        {
+            get
+            { return _Property; }
+            set
+            { 
+                if (_Property == value)
+                    return;
+                _Property = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public T? Invoke(Dictionary<string, object> proxy)
         {
+            if (Reference == null) throw new InvalidOperationException("Referenceが設定されていません");
+            if (Property == null) throw new InvalidOperationException("Propertyが設定されていません");
+
             object target = proxy[Reference];
             Type type = target.GetType();
             PropertyInfo? propertyInfo = type.GetProperty(Property);
@@ -23,6 +54,15 @@ namespace AviUtlExoToAup2Converter.Models.ConvertLogic
             if (objValue == null) return default;
 
             return (T)objValue;
+        }
+
+        public object Clone()
+        {
+            return new GetProperty<T>()
+            {
+                Reference = Reference,
+                Property = Property
+            };
         }
     }
 }

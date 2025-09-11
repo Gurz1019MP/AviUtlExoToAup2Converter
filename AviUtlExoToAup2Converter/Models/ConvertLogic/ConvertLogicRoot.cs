@@ -1,38 +1,28 @@
 ﻿using AviUtlExoToAup2Converter.Models.Item.Aup2;
 using AviUtlExoToAup2Converter.Models.Item.Exo;
+using Livet;
 using System.Runtime.Serialization;
 
 namespace AviUtlExoToAup2Converter.Models.ConvertLogic
 {
     [DataContract]
-    [KnownType(typeof(BlendModeValue))]
-    [KnownType(typeof(BoolConditionEqual))]
-    [KnownType(typeof(CalcSub<int>))]
-    [KnownType(typeof(CalcSub<float>))]
-    [KnownType(typeof(CalcSum<int>))]
-    [KnownType(typeof(CalcSum<float>))]
-    [KnownType(typeof(ConditionEqual<string>))]
-    [KnownType(typeof(ConditionEqual<int>))]
-    [KnownType(typeof(ConditionEqual<float>))]
-    [KnownType(typeof(FindFirstFilterByName))]
-    [KnownType(typeof(FloatMapper))]
-    [KnownType(typeof(FloatValue))]
-    [KnownType(typeof(FrameToTime))]
-    [KnownType(typeof(GetAttributeValue<string>))]
-    [KnownType(typeof(GetAttributeValue<int>))]
-    [KnownType(typeof(GetAttributeValue<float>))]
-    [KnownType(typeof(GetProperty<string>))]
-    [KnownType(typeof(GetProperty<int>))]
-    [KnownType(typeof(GetProperty<float>))]
-    [KnownType(typeof(IntMapper))]
-    [KnownType(typeof(IntValue))]
-    [KnownType(typeof(PlayPositionMapper))]
-    [KnownType(typeof(StringMapper))]
-    [KnownType(typeof(StringValue))]
-    public class ConvertLogicRoot
+    public class ConvertLogicRoot : NotificationObject
     {
+        private LogicItem[] _LogicItems = [];
+
         [DataMember]
-        public LogicItem[] LogicItems { get; set; } = [];
+        public LogicItem[] LogicItems
+        {
+            get
+            { return _LogicItems; }
+            set
+            { 
+                if (_LogicItems == value)
+                    return;
+                _LogicItems = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public GeneralEffect[] FiltersToEffects(ExoItem baseItem, Item.Exo.ObjectItem baseObjectItem)
         {
@@ -74,6 +64,11 @@ namespace AviUtlExoToAup2Converter.Models.ConvertLogic
             }
 
             return [.. effects];
+        }
+
+        public void AddLogicItem()
+        {
+            LogicItems = [.. LogicItems.Append(new LogicItem())];
         }
 
         public readonly static ConvertLogicRoot DevLogic = new()

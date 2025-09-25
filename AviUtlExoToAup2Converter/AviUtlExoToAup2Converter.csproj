@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="LivetCask" Version="4.0.2" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +24,54 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Models\Item\Aup2\Scene.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\IntValueViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\VariableViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\StringValueViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\PlayPositionMapperViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\StringMapperViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\IntMapperViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\GetPropertyViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\GetAttributeValueViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\FrameToTimeViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\FloatValueViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\FloatMapperViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\FindFirstFilterByNameViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\ConditionEqualViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\CalcSumViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\CalcSubViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\BoolConditionEqualViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ViewModels\Item\Aup2\Aup2ItemViewModel.cs">

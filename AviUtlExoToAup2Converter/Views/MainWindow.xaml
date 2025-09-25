@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AviUtlExoToAup2Converter"
+        xmlns:v="clr-namespace:AviUtlExoToAup2Converter.Views"
         xmlns:vm="clr-namespace:AviUtlExoToAup2Converter.ViewModels"
         xmlns:vmie="clr-namespace:AviUtlExoToAup2Converter.ViewModels.Item.Exo"
         xmlns:vmia="clr-namespace:AviUtlExoToAup2Converter.ViewModels.Item.Aup2"
@@ -12,118 +13,12 @@
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
-    <Window.Resources>
-        <Style TargetType="{x:Type Expander}">
-            <Setter Property="IsExpanded" Value="True"/>
-        </Style>
-    </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="100"/>
-            </Grid.ColumnDefinitions>
-            <Label Content="EXOファイルパス："/>
-            <TextBox Grid.Column="1" Text="{Binding ExoPath, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
-            <Button Grid.Column="2" Content="読み込み" Command="{Binding ImportCommand}"/>
-        </Grid>
-        <Grid Grid.Column="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="100"/>
-            </Grid.ColumnDefinitions>
-            <Label Content="Aup2ファイルパス："/>
-            <TextBox Grid.Column="1" Text="{Binding Aup2Path, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
-            <Button Grid.Column="2" Content="保存" Command="{Binding ExportCommand}"/>
-        </Grid>
-        <ScrollViewer Grid.Row="1">
-            <ContentPresenter Content="{Binding ExoItem2}">
-                <ContentPresenter.ContentTemplate>
-                    <DataTemplate DataType="{x:Type vmie:ExoItemViewModel}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <ItemsControl ItemsSource="{Binding Attributes}" ItemTemplate="{StaticResource AttributeTemplate}"/>
-                            <ItemsControl Grid.Row="1" ItemsSource="{Binding ObjectItems}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type vmie:ObjectItemViewModel}">
-                                        <Border BorderBrush="Gray"
-                                    BorderThickness="1"
-                                    Margin="2"
-                                    CornerRadius="5">
-                                            <StackPanel>
-                                                <ItemsControl ItemsSource="{Binding Attributes}" ItemTemplate="{StaticResource AttributeTemplate}"/>
-                                                <ItemsControl Grid.Row="3" Grid.ColumnSpan="2"
-                                                              Padding="20,0,0,0" ItemsSource="{Binding Filters}"/>
-                                            </StackPanel>
-                                        </Border>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </Grid>
-                    </DataTemplate>
-                </ContentPresenter.ContentTemplate>
-            </ContentPresenter>
-        </ScrollViewer>
-        <Button Grid.Row="1" Grid.Column="1" Content="変換" Command="{Binding ConvertCommand}"/>
-        <ScrollViewer Grid.Row="1" Grid.Column="2">
-            <ContentPresenter Content="{Binding Aup2Item2}">
-                <ContentPresenter.ContentTemplate>
-                    <DataTemplate DataType="vmia:Aup2Item2ViewModel">
-                        <ItemsControl Grid.Row="1" ItemsSource="{Binding Scenes}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="vmia:SceneViewModel">
-                                    <Border BorderBrush="LightGray"
-                                            BorderThickness="1"
-                                            Margin="2"
-                                            CornerRadius="5">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="*"/>
-                                            </Grid.RowDefinitions>
-                                            <ItemsControl ItemsSource="{Binding Attributes}" ItemTemplate="{StaticResource AttributeTemplate}"/>
-                                            <ItemsControl Grid.Row="1" ItemsSource="{Binding ObjectItems}">
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate DataType="vmia:ObjectItemViewModel">
-                                                        <Border BorderBrush="Gray"
-                                                                BorderThickness="1"
-                                                                Margin="2"
-                                                                CornerRadius="5">
-                                                            <Grid>
-                                                                <Grid.RowDefinitions>
-                                                                    <RowDefinition Height="Auto"/>
-                                                                    <RowDefinition Height="*"/>
-                                                                </Grid.RowDefinitions>
-                                                                <ItemsControl ItemsSource="{Binding Attributes}" ItemTemplate="{StaticResource AttributeTemplate}"/>
-                                                                <ItemsControl Grid.Row="1" Grid.ColumnSpan="4"
-                                                                              Padding="20,0,0,0" ItemsSource="{Binding Effects}"/>
-                                                            </Grid>
-                                                        </Border>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </DataTemplate>
-                </ContentPresenter.ContentTemplate>
-            </ContentPresenter>
-        </ScrollViewer>
-    </Grid>
+    <TabControl>
+        <TabItem Header="変換">
+            <v:Convert DataContext="{Binding Convert}"/>
+        </TabItem>
+        <TabItem Header="設定">
+            <v:Setting DataContext="{Binding Setting}"/>
+        </TabItem>
+    </TabControl>
 </Window>

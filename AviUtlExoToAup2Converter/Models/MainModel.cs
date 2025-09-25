@@ -1,7 +1,4 @@
-﻿using AviUtlExoToAup2Converter.Models.DAO;
-using AviUtlExoToAup2Converter.Models.Item.Aup2;
-using AviUtlExoToAup2Converter.Models.Item.Exo;
-using Livet;
+﻿using Livet;
 
 namespace AviUtlExoToAup2Converter.Models
 {
@@ -9,56 +6,34 @@ namespace AviUtlExoToAup2Converter.Models
     {
         #region Property
 
-        private ExoItem? _ExoItem2;
+        private Convert _ConvertModel = new();
 
-        public ExoItem? ExoItem2
+        public Convert ConvertModel
         {
             get
-            { return _ExoItem2; }
+            { return _ConvertModel; }
             set
-            {
-                if (_ExoItem2 == value)
+            { 
+                if (_ConvertModel == value)
                     return;
-                _ExoItem2 = value;
+                _ConvertModel = value;
                 RaisePropertyChanged();
             }
         }
 
-        private Aup2Item? _Aup2Item2;
+        private Setting _SettingModel = new();
 
-        public Aup2Item? Aup2Item2
+        public Setting SettingModel
         {
             get
-            { return _Aup2Item2; }
+            { return _SettingModel; }
             set
-            {
-                if (_Aup2Item2 == value)
+            { 
+                if (_SettingModel == value)
                     return;
-                _Aup2Item2 = value;
+                _SettingModel = value;
                 RaisePropertyChanged();
             }
-        }
-
-        #endregion
-
-        #region Method
-
-        public void Import(string path)
-        {
-            //ExoItem = ExoAccessObject.Deserialize(path);
-            ExoItem2 = ExoAccessObject.Deserialize(path);
-        }
-
-        public void Convert()
-        {
-            if (ExoItem2 == null) throw new ArgumentNullException();
-            Aup2Item2 = ExoItem2.Convert();
-        }
-
-        public void Export(string path)
-        {
-            if (Aup2Item2 == null) throw new ArgumentNullException();
-            Aup2AccessObject.Serialize(Aup2Item2, path);
         }
 
         #endregion

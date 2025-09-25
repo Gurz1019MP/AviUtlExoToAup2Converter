@@ -6,8 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Views/ResourceDictionary/FilterDictionary.xaml"/>
-                <ResourceDictionary Source="/Views/ResourceDictionary/EffectDictionary.xaml"/>
+                <ResourceDictionary Source="/Views/ResourceDictionary/ItemDictionary.xaml"/>
+                <ResourceDictionary Source="/Views/ResourceDictionary/ConvertLogicDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

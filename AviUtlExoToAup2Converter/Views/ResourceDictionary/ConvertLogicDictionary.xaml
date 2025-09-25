@@ -1,0 +1,518 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:AviUtlExoToAup2Converter.Views"
+                    xmlns:vmc="clr-namespace:AviUtlExoToAup2Converter.ViewModels.ConvertLogic"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:vb="clr-namespace:AviUtlExoToAup2Converter.Views.behavior"
+                    xmlns:vc="clr-namespace:AviUtlExoToAup2Converter.Views.converter">
+    <v:ConvertLogicTemplateSelector x:Key="convertLogicTemplateSelector"/>
+    <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter"/>
+    <vc:TypeToBrushConverter x:Key="type2BrushConverter"
+                             IntBrush="Cyan"
+                             FloatBrush="Yellow"
+                             StringBrush="GreenYellow"
+                             EmptyBrush="LightGray"/>
+    <Style x:Key="TransparentTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Grid>
+                        <TextBlock x:Name="Placeholder"
+                                   Text="値を入力してください"
+                                   Opacity="0.5"
+                                   Visibility="Collapsed"/>
+                        <ScrollViewer x:Name="PART_ContentHost" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Text.IsEmpty, RelativeSource={RelativeSource Self}}" Value="True">
+                            <Setter Property="Visibility" TargetName="Placeholder" Value="Visible"/>
+                        </DataTrigger>
+                        <Trigger Property="v:ReadOnlyProperty.IsReadOnly" Value="True">
+                            <Setter Property="Visibility" TargetName="Placeholder" Value="Collapsed"/>
+                            <Setter Property="IsReadOnly" Value="True"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ItemBorder" TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="5"/>
+    </Style>
+    <Style x:Key="NoItemBorder" TargetType="{x:Type Border}" BasedOn="{StaticResource ItemBorder}">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Background" Value="LightGray"/>
+    </Style>
+    <DataTemplate DataType="{x:Type vmc:LogicItemViewModel}">
+        <v:LogicItem/>
+    </DataTemplate>
+    <DataTemplate x:Key="IntValueViewModel" DataType="{x:Type vmc:IntValueViewModel}">
+        <Border Background="Cyan"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
+                <TextBlock Text="数値："/>
+                <TextBox Text="{Binding Model.Value}" Style="{StaticResource TransparentTextBox}" Margin="5,0"/>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="FloatValueViewModel" DataType="{x:Type vmc:FloatValueViewModel}">
+        <Border Background="Yellow"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
+                <TextBlock Text="数値："/>
+                <TextBox Text="{Binding Model.Value}" Style="{StaticResource TransparentTextBox}" Margin="5,0"/>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="StringValueViewModel" DataType="{x:Type vmc:StringValueViewModel}">
+        <Border Background="GreenYellow"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
+                <TextBlock Text="文字列："/>
+                <TextBox Text="{Binding Model.Value}" Style="{StaticResource TransparentTextBox}" Margin="5,0"/>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="GetAttributeValueViewModel`1" DataType="{x:Type vmc:GetAttributeValueViewModel`1}">
+        <Border Background="{Binding Converter={StaticResource type2BrushConverter}}"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Border>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Style.Triggers>
+                                <Trigger Property="v:ReadOnlyProperty.IsReadOnly" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <ComboBox SelectedValue="{Binding Model.Reference}" Margin="5,0"
+                              DisplayMemberPath="Key" SelectedValuePath="Value"
+                              ItemsSource="{Binding DataContext.VariableItems, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type v:LogicItem}}}"/>
+                </Border>
+                <TextBlock Text="から設定値" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding Model.From}" Margin="5,0" VerticalAlignment="Center"
+                         Style="{StaticResource TransparentTextBox}"/>
+                <TextBlock Text="の値を取得" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="GetPropertyViewModel`1" DataType="{x:Type vmc:GetPropertyViewModel`1}">
+        <Border Background="{Binding Converter={StaticResource type2BrushConverter}}"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Border>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Style.Triggers>
+                                <Trigger Property="v:ReadOnlyProperty.IsReadOnly" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <ComboBox SelectedValue="{Binding Model.Reference}" Margin="5,0"
+                              DisplayMemberPath="Key" SelectedValuePath="Value"
+                              ItemsSource="{Binding DataContext.VariableItems, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type v:LogicItem}}}"/>
+                </Border>
+                <TextBlock Text="の" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding Model.Property}" Margin="5,0" VerticalAlignment="Center"
+                         Style="{StaticResource TransparentTextBox}"/>
+                <TextBlock Text="を取得" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="ConditionEqualViewModel`1" DataType="{x:Type vmc:ConditionEqualViewModel`1}">
+        <Border Background="PaleVioletRed"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                AllowDrop="True">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel Orientation="Horizontal">
+                <Border Visibility="{Binding HasOperand1, Converter={StaticResource bool2VisibilityConverter}}">
+                    <ContentPresenter Content="{Binding Operand1}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
+                </Border>
+                <Border Visibility="{Binding NoOperand1, Converter={StaticResource bool2VisibilityConverter}}"
+                        Style="{StaticResource NoItemBorder}"
+                        Background="{Binding Converter={StaticResource type2BrushConverter}}">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropOperand1Command}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="値1を設定してください" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <TextBlock Text="と" VerticalAlignment="Center"/>
+                <Border Visibility="{Binding HasOperand2, Converter={StaticResource bool2VisibilityConverter}}">
+                    <ContentPresenter Content="{Binding Operand2}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
+                </Border>
+                <Border Visibility="{Binding NoOperand2, Converter={StaticResource bool2VisibilityConverter}}"
+                        Style="{StaticResource NoItemBorder}"
+                        Background="{Binding Converter={StaticResource type2BrushConverter}}">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropOperand2Command}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="値2を設定してください" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <TextBlock Text="が等しいとき" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="BoolConditionEqualViewModel" DataType="{x:Type vmc:BoolConditionEqualViewModel}">
+        <Border Background="PaleVioletRed"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel>
+                <Border Visibility="{Binding HasCondition1, Converter={StaticResource bool2VisibilityConverter}}">
+                    <ContentPresenter Content="{Binding Operand1}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" HorizontalAlignment="Center"/>
+                </Border>
+                <Border Visibility="{Binding NoCondition1, Converter={StaticResource bool2VisibilityConverter}}"
+                        Style="{StaticResource NoItemBorder}">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropOperand1Command}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="条件1を設定してください" Margin="5" HorizontalAlignment="Center"/>
+                </Border>
+                <TextBlock Text="かつ" HorizontalAlignment="Center"/>
+                <Border Visibility="{Binding HasCondition2, Converter={StaticResource bool2VisibilityConverter}}">
+                    <ContentPresenter Content="{Binding Operand2}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" HorizontalAlignment="Center"/>
+                </Border>
+                <Border Visibility="{Binding NoCondition2, Converter={StaticResource bool2VisibilityConverter}}"
+                        Style="{StaticResource NoItemBorder}">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropOperand2Command}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="条件2を設定してください" Margin="5" HorizontalAlignment="Center"/>
+                </Border>
+                <TextBlock Text="のとき" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="IntMapperViewModel" DataType="{x:Type vmc:IntMapperViewModel}">
+        <Border Background="LightBlue"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{Binding Model.To}" VerticalAlignment="Center" Margin="5,0"
+                         Style="{StaticResource TransparentTextBox}"/>
+                <TextBlock Text="へ次の値を設定" VerticalAlignment="Center"/>
+                <Border Visibility="{Binding HasFrom, Converter={StaticResource bool2VisibilityConverter}}">
+                    <ContentPresenter Content="{Binding From}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5"/>
+                </Border>
+                <Border Visibility="{Binding NoFrom, Converter={StaticResource bool2VisibilityConverter}}"
+                        Style="{StaticResource NoItemBorder}"
+                        Background="Cyan">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropFromCommand}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="値を設定してください" Margin="5" HorizontalAlignment="Center"/>
+                </Border>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="FloatMapperViewModel" DataType="{x:Type vmc:FloatMapperViewModel}">
+        <Border Background="LightYellow"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{Binding Model.To}" VerticalAlignment="Center" Margin="5,0"
+                         Style="{StaticResource TransparentTextBox}"/>
+                <TextBlock Text="へ次の値を設定" VerticalAlignment="Center"/>
+                <Border Visibility="{Binding HasFrom, Converter={StaticResource bool2VisibilityConverter}}">
+                    <ContentPresenter Content="{Binding From}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" VerticalAlignment="Center"/>
+                </Border>
+                <Border Visibility="{Binding NoFrom, Converter={StaticResource bool2VisibilityConverter}}"
+                        Style="{StaticResource NoItemBorder}"
+                        Background="Yellow">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropFromCommand}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="値を設定してください" Margin="5" HorizontalAlignment="Center"/>
+                </Border>
+                <TextBlock Text="桁数" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding Model.Format}" VerticalAlignment="Center" Margin="5,0"
+                         Style="{StaticResource TransparentTextBox}"/>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="StringMapperViewModel" DataType="{x:Type vmc:StringMapperViewModel}">
+        <Border Background="LightGreen"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{Binding Model.To}" VerticalAlignment="Center" Margin="5,0"
+                         Style="{StaticResource TransparentTextBox}"/>
+                <TextBlock Text="へ次の値を設定" VerticalAlignment="Center"/>
+                <Border Visibility="{Binding HasFrom, Converter={StaticResource bool2VisibilityConverter}}">
+                    <ContentPresenter Content="{Binding From}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" VerticalAlignment="Center"/>
+                </Border>
+                <Border Visibility="{Binding NoFrom, Converter={StaticResource bool2VisibilityConverter}}"
+                        Style="{StaticResource NoItemBorder}"
+                        Background="GreenYellow">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropFromCommand}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="値を設定してください" Margin="5" HorizontalAlignment="Center"/>
+                </Border>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="PlayPositionMapperViewModel" DataType="{x:Type vmc:PlayPositionMapperViewModel}">
+        <Border Background="Pink"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{Binding Model.To}" VerticalAlignment="Center" Margin="5,0"
+                            Style="{StaticResource TransparentTextBox}"/>
+                <TextBlock Text="へ次の値を設定" VerticalAlignment="Center"/>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Visibility="{Binding HasStart, Converter={StaticResource bool2VisibilityConverter}}">
+                            <ContentPresenter Content="{Binding Start}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border Visibility="{Binding NoStart, Converter={StaticResource bool2VisibilityConverter}}"
+                                Background="Yellow"
+                                Style="{StaticResource NoItemBorder}">
+                            <TextBlock Text="開始位置を設定してください" Margin="5" HorizontalAlignment="Center"/>
+                        </Border>
+                        <TextBlock Text="～" VerticalAlignment="Center"/>
+                        <Border Visibility="{Binding HasEnd, Converter={StaticResource bool2VisibilityConverter}}">
+                            <ContentPresenter Content="{Binding End}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border Visibility="{Binding NoEnd, Converter={StaticResource bool2VisibilityConverter}}"
+                                Background="Yellow"
+                                Style="{StaticResource NoItemBorder}">
+                            <TextBlock Text="終了位置を設定してください" Margin="5" HorizontalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="再生範囲" VerticalAlignment="Center"/>
+                        <Border Visibility="{Binding HasRange, Converter={StaticResource bool2VisibilityConverter}}">
+                            <ContentPresenter Content="{Binding Range}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border Visibility="{Binding NoRange, Converter={StaticResource bool2VisibilityConverter}}"
+                                Background="Cyan"
+                                Style="{StaticResource NoItemBorder}">
+                            <TextBlock Text="範囲を設定してください" Margin="5" HorizontalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="CalcSubViewModel`1" DataType="{x:Type vmc:CalcSubViewModel`1}">
+        <Border Background="{Binding Converter={StaticResource type2BrushConverter}}"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel Orientation="Horizontal">
+                <Border Visibility="{Binding HasOperand1, Converter={StaticResource bool2VisibilityConverter}}"
+                        Margin="5" VerticalAlignment="Center">
+                    <ContentPresenter Content="{Binding Operand1}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"/>
+                </Border>
+                <Border Visibility="{Binding NoOperand1, Converter={StaticResource bool2VisibilityConverter}}"
+                        Margin="5" VerticalAlignment="Center"
+                        Style="{StaticResource NoItemBorder}"
+                        Background="{Binding Converter={StaticResource type2BrushConverter}}">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropOperand1Command}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="値1を設定してください" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <TextBlock Text="－" VerticalAlignment="Center"/>
+                <Border Visibility="{Binding HasOperand2, Converter={StaticResource bool2VisibilityConverter}}"
+                        Margin="5" VerticalAlignment="Center">
+                    <ContentPresenter Content="{Binding Operand2}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" Margin="5" VerticalAlignment="Center"/>
+                </Border>
+                <Border Visibility="{Binding NoOperand2, Converter={StaticResource bool2VisibilityConverter}}"
+                        Margin="5" VerticalAlignment="Center"
+                        Style="{StaticResource NoItemBorder}"
+                        Background="{Binding Converter={StaticResource type2BrushConverter}}">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropOperand2Command}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="値2を設定してください" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="CalcSumViewModel`1" DataType="{x:Type vmc:CalcSumViewModel`1}">
+        <Border Background="{Binding Converter={StaticResource type2BrushConverter}}"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel Orientation="Horizontal">
+                <Border Visibility="{Binding HasOperand1, Converter={StaticResource bool2VisibilityConverter}}"
+                        Margin="5" VerticalAlignment="Center">
+                    <ContentPresenter Content="{Binding Operand1}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"/>
+                </Border>
+                <Border Visibility="{Binding NoOperand1, Converter={StaticResource bool2VisibilityConverter}}"
+                        Margin="5" VerticalAlignment="Center"
+                        Style="{StaticResource NoItemBorder}"
+                        Background="{Binding Converter={StaticResource type2BrushConverter}}">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropOperand1Command}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="値1を設定してください" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <TextBlock Text="＋" VerticalAlignment="Center"/>
+                <Border Visibility="{Binding HasOperand2, Converter={StaticResource bool2VisibilityConverter}}"
+                        Margin="5" VerticalAlignment="Center">
+                    <ContentPresenter Content="{Binding Operand2}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"/>
+                </Border>
+                <Border Visibility="{Binding NoOperand2, Converter={StaticResource bool2VisibilityConverter}}"
+                        Margin="5" VerticalAlignment="Center"
+                        Style="{StaticResource NoItemBorder}"
+                        Background="{Binding Converter={StaticResource type2BrushConverter}}">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropOperand2Command}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="値2を設定してください" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="FrameToTimeViewModel" DataType="{x:Type vmc:FrameToTimeViewModel}">
+        <Border Background="Yellow"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="フレームから時間へ" HorizontalAlignment="Center" Margin="5"/>
+                <Border Visibility="{Binding HasFrame, Converter={StaticResource bool2VisibilityConverter}}"
+                        Margin="5" HorizontalAlignment="Center">
+                    <ContentPresenter Content="{Binding Frame}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"/>
+                </Border>
+                <Border Visibility="{Binding NoFrame, Converter={StaticResource bool2VisibilityConverter}}"
+                        Background="Cyan"
+                        Style="{StaticResource NoItemBorder}">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropFrameCommand}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="値を設定してください" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="BlendModeValueViewModel" DataType="{x:Type vmc:BlendModeValueViewModel}">
+        <Border Background="GreenYellow"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="合成モードに変換" HorizontalAlignment="Center" Margin="5"/>
+                <Border Visibility="{Binding HasValue, Converter={StaticResource bool2VisibilityConverter}}"
+                        Margin="5" HorizontalAlignment="Center">
+                    <ContentPresenter Content="{Binding Value}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"/>
+                </Border>
+                <Border Visibility="{Binding NoValue, Converter={StaticResource bool2VisibilityConverter}}"
+                        Style="{StaticResource NoItemBorder}"
+                        Background="Cyan">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropValueCommand}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="値を設定してください" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="FindFirstFilterByNameViewModel" DataType="{x:Type vmc:FindFirstFilterByNameViewModel}">
+        <Border Background="Gold"
+                Style="{StaticResource ItemBorder}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="名前に一致する最初のフィルタを取得" HorizontalAlignment="Center" Margin="5,5,5,0"/>
+                <TextBox Text="{Binding Model.Name}"
+                         Margin="5" HorizontalAlignment="Center"
+                         Style="{StaticResource TransparentTextBox}"/>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+    <DataTemplate x:Key="VariableViewModel" DataType="{x:Type vmc:VariableViewModel}">
+        <Border Background="MediumPurple"
+                Style="{StaticResource ItemBorder}"
+                Margin="5, 0">
+            <i:Interaction.Behaviors>
+                <vb:DragBehavior Model="{Binding Model}"/>
+            </i:Interaction.Behaviors>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="変数名：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBox Text="{Binding Model.Key}" Margin="5" Style="{StaticResource TransparentTextBox}" VerticalAlignment="Center"/>
+                <TextBlock Text="＝" VerticalAlignment="Center"/>
+                <Border Visibility="{Binding HasValue, Converter={StaticResource bool2VisibilityConverter}}"
+                        Margin="5" VerticalAlignment="Center">
+                    <ContentPresenter Content="{Binding Value}" Margin="5" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}" VerticalAlignment="Center"/>
+                </Border>
+                <Border Visibility="{Binding NoValue, Converter={StaticResource bool2VisibilityConverter}}"
+                        Margin="5" VerticalAlignment="Center"
+                        Style="{StaticResource NoItemBorder}">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropValueCommand}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="値を設定してください" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>

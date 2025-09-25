@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="AviUtlExoToAup2Converter.Views.LogicItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AviUtlExoToAup2Converter.Views"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:vmc="clr-namespace:AviUtlExoToAup2Converter.ViewModels.ConvertLogic"
+             xmlns:vb="clr-namespace:AviUtlExoToAup2Converter.Views.behavior"
+             xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+             mc:Ignorable="d" 
+             d:DataContext="vmc:LogicItemViewModel">
+    <Border Style="{StaticResource ItemBorder}">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="0,1">
+                <GradientStop Color="#EEEEEE" Offset="0"/>
+                <GradientStop Color="LightGray" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Disabled">
+            <i:Interaction.Behaviors>
+                <vb:PreventWheelBehavior/>
+            </i:Interaction.Behaviors>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="条件：" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <Border Grid.Column="1" Visibility="{Binding HasCondition, Converter={StaticResource bool2VisibilityConverter}}">
+                    <ContentPresenter Content="{Binding Condition}" ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"/>
+                </Border>
+                <Border Grid.Column="1" Visibility="{Binding NoCondition, Converter={StaticResource bool2VisibilityConverter}}"
+                    Margin="5"
+                    Background="PaleVioletRed"
+                    Style="{StaticResource ItemBorder}">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropConditionCommand}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="条件を設定してください" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <TextBlock Grid.Row="1" Text="エフェクト名：" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Model.EffectName}"
+                     Style="{StaticResource TransparentTextBox}"
+                     Width="200" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Row="2" Grid.RowSpan="2" Text="変数：" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <ItemsControl Grid.Row="2" Grid.Column="1" ItemsSource="{Binding LocalVars}" ItemTemplateSelector="{StaticResource convertLogicTemplateSelector}"/>
+                <Button Grid.Row="3" Grid.Column="1" Content="変数を追加"
+                        Command="{Binding AddVariableCommand}"
+                        Margin="5" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="4" Grid.RowSpan="2" Text="マッピング：" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <ItemsControl Grid.Row="4" Grid.Column="1" ItemsSource="{Binding Mappers}" ItemTemplateSelector="{StaticResource convertLogicTemplateSelector}"/>
+                <Border Grid.Row="5" Grid.Column="1" Margin="5"
+                        Background="LightGray"
+                        Style="{StaticResource ItemBorder}">
+                    <i:Interaction.Behaviors>
+                        <vb:DropBehavior Command="{Binding DropMapperCommand}"/>
+                    </i:Interaction.Behaviors>
+                    <TextBlock Text="ドロップでマッピングを追加" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+    </Border>
+</UserControl>

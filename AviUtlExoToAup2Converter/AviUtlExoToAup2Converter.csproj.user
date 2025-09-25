@@ -2,16 +2,49 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="Models\Convert.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Models\ConvertLogic\ConvertLogicBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Models\Item\Exo\GeneralFilter.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Models\MainModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Models\Setting.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\BlendModeValueViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\ConvertLogicRootViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertLogic\LogicItemViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ConvertViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ViewModels\Item\Exo\GeneralFilterViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ViewModels\MainViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\SettingViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Convert.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\LogicItem.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Setting.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

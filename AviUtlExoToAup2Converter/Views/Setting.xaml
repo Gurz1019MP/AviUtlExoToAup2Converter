@@ -1,0 +1,180 @@
+﻿<UserControl x:Class="AviUtlExoToAup2Converter.Views.Setting"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:v="clr-namespace:AviUtlExoToAup2Converter.Views"
+             xmlns:vm="clr-namespace:AviUtlExoToAup2Converter.ViewModels"
+             xmlns:vb="clr-namespace:AviUtlExoToAup2Converter.Views.behavior"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{x:Type vm:SettingViewModel}">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="変換ロジック定義XML"/>
+            <TextBox Grid.Column="1" Text="{Binding LogicPath, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+            <Button Grid.Column="2" Content="読み込み" Command="{Binding LoadLogicCommand}"/>
+            <Button Grid.Column="3" Content="保存" Command="{Binding SaveLogicCommand}"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.RowSpan="2">
+                <i:Interaction.Behaviors>
+                    <vb:DropBehavior Command="{Binding DropRemoveCommand}"/>
+                </i:Interaction.Behaviors>
+                <TabControl>
+                    <TabItem Header="条件">
+                        <StackPanel>
+                            <GroupBox Header="2つの値が等しい">
+                                <ContentPresenter Content="{Binding EmptyLogicObjects[ConditionEqualViewModel`1]}"
+                                  ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                  Margin="5"
+                                  v:ReadOnlyProperty.IsReadOnly="True"/>
+                            </GroupBox>
+                            <GroupBox Header="2つの条件をともに満たす">
+                                <ContentPresenter Content="{Binding EmptyLogicObjects[BoolConditionEqualViewModel]}"
+                                  ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                  Margin="5"
+                                  v:ReadOnlyProperty.IsReadOnly="True"/>
+                            </GroupBox>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="マッピング">
+                        <StackPanel>
+                            <GroupBox Header="整数値">
+                                <ContentPresenter Content="{Binding EmptyLogicObjects[IntMapperViewModel]}"
+                                  ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                  Margin="5"
+                                  v:ReadOnlyProperty.IsReadOnly="True"/>
+                            </GroupBox>
+                            <GroupBox Header="小数値">
+                                <ContentPresenter Content="{Binding EmptyLogicObjects[FloatMapperViewModel]}"
+                                  ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                  Margin="5"
+                                  v:ReadOnlyProperty.IsReadOnly="True"/>
+                            </GroupBox>
+                            <GroupBox Header="文字列">
+                                <ContentPresenter Content="{Binding EmptyLogicObjects[StringMapperViewModel]}"
+                                  ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                  Margin="5"
+                                  v:ReadOnlyProperty.IsReadOnly="True"/>
+                            </GroupBox>
+                            <GroupBox Header="再生位置">
+                                <ContentPresenter Content="{Binding EmptyLogicObjects[PlayPositionMapperViewModel]}"
+                                  ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                  Margin="5"
+                                  v:ReadOnlyProperty.IsReadOnly="True"/>
+                            </GroupBox>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="値">
+                        <ScrollViewer>
+                            <StackPanel>
+                                <GroupBox Header="整数値">
+                                    <ContentPresenter Content="{Binding EmptyLogicObjects[IntValueViewModel]}"
+                                      ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                      Margin="5"
+                                      v:ReadOnlyProperty.IsReadOnly="True"/>
+                                </GroupBox>
+                                <GroupBox Header="小数値">
+                                    <ContentPresenter Content="{Binding EmptyLogicObjects[FloatValueViewModel]}"
+                                      ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                      Margin="5"
+                                      v:ReadOnlyProperty.IsReadOnly="True"/>
+                                </GroupBox>
+                                <GroupBox Header="文字列">
+                                    <ContentPresenter Content="{Binding EmptyLogicObjects[StringValueViewModel]}"
+                                      ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                      Margin="5"
+                                      v:ReadOnlyProperty.IsReadOnly="True"/>
+                                </GroupBox>
+                                <GroupBox Header="フィルタの設定値">
+                                    <ContentPresenter Content="{Binding EmptyLogicObjects[GetAttributeValueViewModel`1]}"
+                                      ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                      Margin="5"
+                                      v:ReadOnlyProperty.IsReadOnly="True"/>
+                                </GroupBox>
+                                <GroupBox Header="変数の値">
+                                    <ContentPresenter Content="{Binding EmptyLogicObjects[GetPropertyViewModel`1]}"
+                                      ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                      Margin="5"
+                                      v:ReadOnlyProperty.IsReadOnly="True"/>
+                                </GroupBox>
+                                <GroupBox Header="名前に一致する最初のフィルタを取得">
+                                    <ContentPresenter Content="{Binding EmptyLogicObjects[FindFirstFilterByNameViewModel]}"
+                                      ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                      Margin="5"
+                                      v:ReadOnlyProperty.IsReadOnly="True"/>
+                                </GroupBox>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="計算・変換">
+                        <ScrollViewer>
+                            <StackPanel>
+                                <GroupBox Header="２つの値の加算">
+                                    <ContentPresenter Content="{Binding EmptyLogicObjects[CalcSumViewModel`1]}"
+                                      ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                      Margin="5"
+                                      v:ReadOnlyProperty.IsReadOnly="True"/>
+                                </GroupBox>
+                                <GroupBox Header="２つの値の減算">
+                                    <ContentPresenter Content="{Binding EmptyLogicObjects[CalcSubViewModel`1]}"
+                                      ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                      Margin="5"
+                                      v:ReadOnlyProperty.IsReadOnly="True"/>
+                                </GroupBox>
+                                <GroupBox Header="合成モードに変換">
+                                    <ContentPresenter Content="{Binding EmptyLogicObjects[BlendModeValueViewModel]}"
+                                      ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                      Margin="5"
+                                      v:ReadOnlyProperty.IsReadOnly="True"/>
+                                </GroupBox>
+                                <GroupBox Header="フレームを時間に変換">
+                                    <ContentPresenter Content="{Binding EmptyLogicObjects[FrameToTimeViewModel]}"
+                                      ContentTemplateSelector="{StaticResource convertLogicTemplateSelector}"
+                                      Margin="5"
+                                      v:ReadOnlyProperty.IsReadOnly="True"/>
+                                </GroupBox>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </Border>
+            <GridSplitter Grid.RowSpan="2" Grid.Column="1"
+                          Width="10"
+                          HorizontalAlignment="Center"/>
+            <ScrollViewer Grid.Column="2"
+                          Visibility="{Binding HasLogic, Converter={StaticResource bool2VisibilityConverter}}">
+                <ItemsControl ItemsSource="{Binding Logic.LogicItems}"/>
+            </ScrollViewer>
+            <Button Grid.Row="1" Grid.Column="2" Content="ロジックを追加" Command="{Binding Logic.AddLogicItemCommand}"
+                    Visibility="{Binding HasLogic, Converter={StaticResource bool2VisibilityConverter}}"/>
+            <StackPanel Grid.RowSpan="2" Grid.Column="2"
+                        Visibility="{Binding NoLogic, Converter={StaticResource bool2VisibilityConverter}}"
+                        VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="ここに変換ロジックが表示されます"/>
+                <Button Content="ロジックを新規作成" Command="{Binding CreateNewLogicCommand}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
